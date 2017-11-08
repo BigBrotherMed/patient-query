@@ -1,20 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+import allReducers from './reducers';
+import App from './components/app.jsx';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+const store = createStore(allReducers);
 
-  render() {
-    return (
-      <div>
-
-        
-      </div>
-    )
-  }
-}
-
-
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(
+  <Provider store={store}>
+    <App />    
+  </Provider>
+  , document.getElementById('app'));
