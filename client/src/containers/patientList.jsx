@@ -1,12 +1,13 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import {selectPatient} from '../actions/selectPatientAction.js';
 
 class PatientList extends React.Component {
   createListItems() {
     return this.props.patients.map(user => {
       return (
-        <li key={user.id}>{user.name}</li>
+        <li key={user.id} onClick={() => this.props.selectPatient(user)}>{user.name}</li>
       );
     })
   }
@@ -27,4 +28,8 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(PatientList);
+function matchDispatchToProps(dispatch) {
+  return bindActionCreators({selectPatient: selectPatient}, dispatch)
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(PatientList);
