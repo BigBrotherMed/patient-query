@@ -1,26 +1,27 @@
+const parser = require('body-parser');
 const request = require('request');
 const baseUrl = 'https://sb-fhir-dstu2.smarthealthit.org/api/smartdstu2/open';
 
-exports.filterPatients = (test, callback) => {
-	exports.getPatients((err, patients) => {
-		callback(err, patients.filter(patient=> test(patient)));
-	});
-}; 
-
-exports.getPatients = (callback) => {
+exports.getAllPatients = (callback) => {
 	request(baseUrl + '/Patient', (err, res, body) => {
 		callback(err, JSON.parse(body).entry.map(patient => 
-			setPatient(patient.resource)));
+			_setPatient(patient.resource)));
 	});
 };
 
-exports.getPatient = (id , callback) => {
+exports.getPatientById = (id , callback) => {
 	request(baseUrl + '/Patient/' + id, (err, res, body) => {
 		callback(err, setPatient(JSON.parse(body)));
 	});
 };
 
-const setPatient = (data) => {
+exports.queryPatients = (test, callback) => {
+	exports.getAllPatients((err, patients) => {
+		callback(err, patients.filter(patient=> test(patient)));
+	});
+}; 
+
+const _setPatient = (data) => {
 	const patient = {
 		id: data.id,
 		lastUpdated: data.meta.lastUpdated,
@@ -44,6 +45,3 @@ const setPatient = (data) => {
 	return patient;
 }
 
-// exports.getPatients((err, data) => console.log(data.length));
-// var test = (patient => patient.gender ==='female');
-// exports.filterPatients(test, (err, data) => console.log('FILTERED', data.length));
