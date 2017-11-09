@@ -2,7 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {selectPatient} from '../actions/selectPatientAction.js';
-// import fhirpatients from '../../../api-data/index.js'; why won't this work?
+import {axiosFetcher} from '../actions/axiosFetchAction.js';
+import axios from 'axios';
 
 class PatientList extends React.Component {
   constructor(props) {
@@ -12,20 +13,26 @@ class PatientList extends React.Component {
     }
   }
 
-  // componentWillMount() {
-  //   fhirpatients.getAllPatients((err, data) => console.log(data));
-  // }
+  componentWillMount() {
+    axios.get('/patients')
+      .then(response => {
+        this.props.axiosFetcher(response.data)
+      })
+      .catch(err => {if(err) { throw err }})
+  }
 
   componentWillReceiveProps(props) {
     if(props.queryPatient !== null) {
       this.setState({list: props.queryPatient})
+    } else if(props.axiosFetcherResults.patients !== null) {
+      this.setState({list: props.axiosFetcherResults.patients})
     }
   }
 
   createListItems() {
     return this.state.list.map(user => {
       return (
-        <li key={user.id} onClick={() => this.props.selectPatient(user)}>{user.name}</li>
+        <li key={user.id} onClick={() => this.props.selectPatient(user)}>{user.firstName} {user.lastName}</li>
       );
     })
   }
@@ -43,12 +50,13 @@ class PatientList extends React.Component {
 function mapStateToProps(state) {
   return {
     patients: state.patients,
-    queryPatient: state.queryPatient
+    queryPatient: state.queryPatient,
+    axiosFetcherResults: state.axiosFetcher
   }
 }
 
 function matchDispatchToProps(dispatch) {
-  return bindActionCreators({selectPatient: selectPatient}, dispatch)
+  return bindActionCreators({selectPatient: selectPatient, axiosFetcher: axiosFetcher}, dispatch)
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(PatientList);
