@@ -1,4 +1,7 @@
 import React from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {queryPatient} from '../actions/queryPatientName.js';
 
 class Query extends React.Component {
   constructor() {
@@ -19,9 +22,7 @@ class Query extends React.Component {
     return (
       <div>
         <input value={this.state.firstName} onChange={this.handleFirstNameChange} placeholder="First Name" />
-        <button> Query </button>
-
-
+        <button onClick={() => this.props.queryPatient()}> Query </button>
 
       </div>
 
