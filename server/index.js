@@ -26,3 +26,9 @@ app.use(express.static(path.resolve(__dirname, '../client/public')));
 //   	res.status(200).send(JSON.stringify({orders: orders}))
 //   }
 // });
+
+app.listen(PORT, function(err) {
+  if(err) { throw err }
+  console.log('listening on port ', PORT);
+});
+
