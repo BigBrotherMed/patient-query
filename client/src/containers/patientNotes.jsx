@@ -5,18 +5,19 @@ import {saveNote} from '../actions/saveNoteAction.js';
 import axios from 'axios';
 
 class PatientNotes extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       noteEditor: '',
       currentNotes: []
     }
     this.handleChange = this.handleChange.bind(this);
     this.prepToSave = this.prepToSave.bind(this);
+    console.log(this.props.patientId);
   }
 
   onComponentDidMount() {
-    axios.get('/notes')
+    axios.get('/notes', {patientId:this.props.patient.id})
     .then(notes => {
       console.log('*&^*&^*&^notes', notes)
       this.setState = {currentNotes:notes}
@@ -37,7 +38,7 @@ class PatientNotes extends React.Component {
     this.props.saveNote(this.state.noteEditor);
 
     axios.post('/notes', {
-      patientId: 1,
+      patientId: this.props.patient.id,
       note: this.state.noteEditor
     }).then(response => {
       console.log(response);
@@ -65,8 +66,14 @@ class PatientNotes extends React.Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    patient: state.activePatient
+  }
+}
+
 function matchDispatchToProps(dispatch) {
   return bindActionCreators({saveNote: saveNote}, dispatch)
 }
 
-export default connect(null, matchDispatchToProps)(PatientNotes);
+export default connect(mapStateToProps, matchDispatchToProps)(PatientNotes);

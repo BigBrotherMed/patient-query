@@ -12,7 +12,7 @@ class PatientDetails extends React.Component {
           <p>No patient selected</p>
         </div>
       );
-
+      
     return (
       <div>
         <h3>Patient Details</h3>

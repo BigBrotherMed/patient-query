@@ -52,7 +52,7 @@ app.get('/medication_orders', (req, res) => {
 
 app.get('/notes', (req, res) => {
 	//TODO: link up so you can specify patientId
-	sequelize.getNotes(1, (allNotes) => {
+	sequelize.getNotes(req.body.patientId, (allNotes) => {
 		res.json(allNotes);
 	})
 });
