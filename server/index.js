@@ -14,8 +14,13 @@ app.use(express.static(path.resolve(__dirname, '../client/public')));
 
 app.listen(PORT, function(err) {
   if(err) { throw err }
+<<<<<<< HEAD
   console.log('listening on port ', PORT);
 });
+=======
+  console.log(`now listening to ${PORT}`);
+})
+>>>>>>> Resolved conflicts with org branch.
 
 app.get('/patients', (req, res) => {
 	if (Object.keys(req.query).length === 0) {
