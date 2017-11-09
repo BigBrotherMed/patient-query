@@ -16,7 +16,13 @@ class PatientDetails extends React.Component {
     return (
       <div>
         <h3>Patient Details</h3>
-        <p>Name: {this.props.patient.name}</p>
+        <p>First name: {this.props.patient.firstName}</p>
+        <p>Last name: {this.props.patient.lastName}</p>
+        <p>Birthdate: {this.props.patient.birthdate}</p>
+        <p>Gender: {this.props.patient.gender}</p>
+        <p>Street: {this.props.patient.address}</p>
+        <p>City: {this.props.patient.city}</p>
+        <p>Zip: {this.props.patient.zip}</p>
         <PatientNotes />
       </div>
     );
