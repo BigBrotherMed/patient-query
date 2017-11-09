@@ -9,10 +9,18 @@ class PatientNotes extends React.Component {
     super();
     this.state = {
       noteEditor: '',
-      currentNotes: ['note1', 'note2', 'note3']
+      currentNotes: []
     }
     this.handleChange = this.handleChange.bind(this);
     this.prepToSave = this.prepToSave.bind(this);
+  }
+
+  onComponentDidMount() {
+    axios.get('/notes')
+    .then(notes => {
+      console.log('*&^*&^*&^notes', notes)
+      this.setState = {currentNotes:notes}
+    });
   }
 
   handleChange(e) {
@@ -23,20 +31,19 @@ class PatientNotes extends React.Component {
 
   prepToSave(e) {
     e.preventDefault();
-    console.log(this.state.noteEditor);
+
     let noteToSave = this.state.currentNotes.slice();
     noteToSave.push(this.state.noteEditor);
     this.props.saveNote(this.state.noteEditor);
 
     axios.post('/notes', {
       patientId: 1,
-      note: 'axios test'
+      note: this.state.noteEditor
     }).then(response => {
       console.log(response);
     }).catch(err => {
       console.log(err);
     });
-
 
     this.setState({
       noteEditor: '',
