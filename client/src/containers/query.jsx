@@ -22,7 +22,7 @@ class Query extends React.Component {
     return (
       <div>
         <input value={this.state.firstName} onChange={this.handleFirstNameChange} placeholder="First Name" />
-        <button onClick={() => this.props.queryPatient()}> Query </button>
+        <button onClick={() => this.props.queryPatient(this.state)}> Query </button>
 
       </div>
 
@@ -32,10 +32,14 @@ class Query extends React.Component {
   }
 }
 
-// const Query = () => (
-//   <div>
-//     <p>Query component goes here</p>
-//   </div>
-// );
+// function mapStateToProps(state) {
+//   return {
+//     patients: state.patients
+//   }
+// }
 
-export default Query;
+function matchDispatchToProps(dispatch) {
+  return bindActionCreators({queryPatient: queryPatient}, dispatch)
+}
+
+export default connect(null, matchDispatchToProps)(Query);

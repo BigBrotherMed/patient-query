@@ -1,7 +1,7 @@
-export const queryPatientName = user => {
-  console.log(`You clicked on user ${user.name}`);
+export const queryPatient = query => {
+  console.log(`SUBMIT QUERY ${JSON.stringify(query)}`);
   return {
     type: "SUBMIT_QUERY",
-    payload: user
+    payload: query
   }
 }
