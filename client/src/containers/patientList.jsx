@@ -1,6 +1,6 @@
 import React from 'react';
-import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import {selectPatient} from '../actions/selectPatientAction.js';
 // import fhirpatients from '../../../api-data/index.js'; why won't this work?
 
