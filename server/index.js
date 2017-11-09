@@ -18,14 +18,10 @@ app.listen(PORT, function(err) {
 });
 
 app.get('/patients', (req, res) => {
-  fhir.getAllPatients((err, patients) => {
-  	res.status(200).send(JSON.stringify({patients: patients}));
-  });
-});
-
-app.get('/patient', (req, res) => {
 	if (Object.keys(req.query).length === 0) {
-		res.status(404).send();
+	  fhir.getAllPatients((err, patients) => {
+	  	res.status(200).send(JSON.stringify({patients: patients}));
+	  });
 	} else if (req.query.id && Object.keys(req.query).length === 1) {
 	  fhir.getPatientById(req.query.id,(err, patient) => {
 	  	res.status(200).send(JSON.stringify({patient: patient}));
@@ -37,9 +33,18 @@ app.get('/patient', (req, res) => {
   }
 });
 
-app.get('/medication-orders', (req, res) => {
-  fhir.getAllMedicationOrders((err, orders) => {
-  	res.status(200).send(JSON.stringify({orders: orders}));
-  });
+app.get('/medication_orders', (req, res) => {
+	if (Object.keys(req.query).length === 0) {
+	  fhir.getAllMedicationOrders((err, orders) => {
+	  	res.status(200).send(JSON.stringify({orders: orders}));
+	  });
+	} else if (req.query.id) {
+	  fhir.getMedicationOrderById(req.query.id,(err, order) => {
+	  	res.status(200).send(JSON.stringify({order: order}));
+	  });
+	} else if (req.query.patientId) {
+	  fhir.getMedicationOrdersByPatientId(req.query.patientId,(err, orders) => {
+	  	res.status(200).send(JSON.stringify({orders: orders}));
+	  });
+  }
 });
-

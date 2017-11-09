@@ -9,7 +9,7 @@ exports.getAllMedicationOrders = (callback) => {
 	});
 };
 
-exports.getMedicationOrderByOrdertId = (orderId , callback) => {
+exports.getMedicationOrderById = (orderId , callback) => {
 	request(baseUrl + '/MedicationOrder/' + orderId, (err, res, body) => {
 		callback(err, _setOrder(JSON.parse(body)));
 	});
@@ -17,13 +17,16 @@ exports.getMedicationOrderByOrdertId = (orderId , callback) => {
 
 exports.getMedicationOrdersByPatientId = (patientId , callback) => {
 	exports.getAllMedicationOrders((err, orders) => {
-		callback(err, orders.filter(order=> order.patient.reference === 'Patient/' + patientId));
+		callback(err, orders.filter(order=> order.patientId === 'Patient/' + patientId));
 	});
 };
 
-exports.queryMedicationOrders = (query, callback) => {
+exports.queryMedicationOrders = (queryString, callback) => {
 	exports.getAllMedicationOrders((err, orders) => {
-		callback(err, orders.filter(order => query(order)));
+		Object.keys(queryString).forEach(key => {
+			orders = orders.filter(order => order[key] === queryString[key])
+		});
+		callback(err, orders);
 	});
 }; 
 
@@ -31,7 +34,7 @@ const _setOrder = (data) => {
 	var dosage = data.dosageInstruction[0].timing.repeat;
 	const order = {
 		id: data.id,
-		idPatient: data.patient.reference,
+		patientId: data.patient.reference,
 		lastUpdated: data.meta.lastUpdated,
 		idMedication: data.medicationCodeableConcept.coding[0].code,
 		medicationText: data.medicationCodeableConcept.coding[0].display,
