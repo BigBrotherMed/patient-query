@@ -15,9 +15,12 @@ exports.getPatientById = (patientId , callback) => {
 	});
 };
 
-exports.queryPatients = (query, callback) => {
+exports.queryPatients = (queryString, callback) => {
 	exports.getAllPatients((err, patients) => {
-		callback(err, patients.filter(patient => query(patient)));
+		Object.keys(queryString).forEach(key => {
+			patients = patients.filter(patient => patient[key] === queryString[key])
+		});
+		callback(err, patients);
 	});
 }; 
 
