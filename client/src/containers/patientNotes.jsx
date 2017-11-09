@@ -1,5 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {saveNote} from '../actions/saveNoteAction.js';
 
 class PatientNotes extends React.Component {
   constructor() {
@@ -9,7 +11,7 @@ class PatientNotes extends React.Component {
       currentNotes: ['note1', 'note2', 'note3']
     }
     this.handleChange = this.handleChange.bind(this);
-    this.saveNote = this.saveNote.bind(this);
+    this.prepToSave = this.prepToSave.bind(this);
   }
 
   handleChange(e) {
@@ -18,14 +20,16 @@ class PatientNotes extends React.Component {
     })
   }
 
-  saveNote(e) {
+  prepToSave(e) {
     e.preventDefault();
+    console.log(this.state.noteEditor);
     let noteToSave = this.state.currentNotes.slice();
     noteToSave.push(this.state.noteEditor);
+    this.props.saveNote(this.state.noteEditor);
     this.setState({
       noteEditor: '',
       currentNotes: noteToSave
-    })
+    });
   } 
 
   render() {
@@ -36,10 +40,14 @@ class PatientNotes extends React.Component {
           return <li key={index}>{note}</li>
         })}
         <input value={this.state.noteEditor} onChange={this.handleChange}/>
-        <button type="button" onClick={this.saveNote}>Save note</button>
+        <button type="button" onClick={this.prepToSave}>Save note</button>
       </div>
     )
   }
 }
 
-export default PatientNotes;
+function matchDispatchToProps(dispatch) {
+  return bindActionCreators({saveNote: saveNote}, dispatch)
+}
+
+export default connect(null, matchDispatchToProps)(PatientNotes);
