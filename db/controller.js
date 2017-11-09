@@ -3,6 +3,7 @@ const sequelize = require('./index.js');
 //This function takes in the patient ID and a note to add. Callback parameter is
 //invoked on success with all notes associated with current patient
 exports.addNote = (patientId, note, callback) => {
+  console.log('***arrived at sequelize.addnote')
   sequelize.models.note.create({patientId:patientId, note:note})
   .then(() => {
     sequelize.models.note.findAll({where: {patientId:patientId}})
@@ -14,8 +15,8 @@ exports.addNote = (patientId, note, callback) => {
 
 //Callback is invoked on success
 exports.getNotes = (patientId, callback) => {
-  sequelize.models.note.findAll({where: {patientId:patientId}}).
-  done(allNotes => {
+  sequelize.models.note.findAll({where: {patientId:patientId}})
+  .done(allNotes => {
     callback(allNotes);
   })
 }

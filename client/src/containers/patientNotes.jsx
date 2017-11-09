@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {saveNote} from '../actions/saveNoteAction.js';
+import axios from 'axios';
 
 class PatientNotes extends React.Component {
   constructor() {
@@ -26,6 +27,17 @@ class PatientNotes extends React.Component {
     let noteToSave = this.state.currentNotes.slice();
     noteToSave.push(this.state.noteEditor);
     this.props.saveNote(this.state.noteEditor);
+
+    axios.post('/notes', {
+      patientId: 1,
+      note: 'axios test'
+    }).then(response => {
+      console.log(response);
+    }).catch(err => {
+      console.log(err);
+    });
+
+
     this.setState({
       noteEditor: '',
       currentNotes: noteToSave

@@ -4,6 +4,7 @@ const path = require('path');
 const parser = require('body-parser');
 const request = require('request');
 const fhir = require('../api-data/index.js');
+const sequelize = require('../db/controller.js');
 
 const app = express();
 const PORT = 5000;
@@ -47,4 +48,18 @@ app.get('/medication_orders', (req, res) => {
 	  	res.status(200).send(JSON.stringify({orders: orders}));
 	  });
   }
+});
+
+app.get('/notes', (req, res) => {
+	//TODO: link up so you can specify patientId
+	sequelize.getNotes(3, (allNotes) => {
+		res.json(allNotes);
+	})
+});
+
+app.post('/notes', (req, res) => {
+	console.log(`*****patientId:${req.body.patientId} || note:${req.body.note}`)
+	sequelize.addNote(1, 'another test note', allNotes => {
+		res.json(allNotes);
+	})
 });
