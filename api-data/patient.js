@@ -1,23 +1,23 @@
 const parser = require('body-parser');
 const request = require('request');
-const baseUrl = 'https://sb-fhir-dstu2.smarthealthit.org/api/smartdstu2/open';
+const baseUrl = 'https://sb-fhir-dstu2.smarthealthit.org/api/smartdstu2/open/Patient';
 
 exports.getAllPatients = (callback) => {
-	request(baseUrl + '/Patient', (err, res, body) => {
+	request(baseUrl, (err, res, body) => {
 		callback(err, JSON.parse(body).entry.map(patient => 
 			_setPatient(patient.resource)));
 	});
 };
 
-exports.getPatientById = (id , callback) => {
-	request(baseUrl + '/Patient/' + id, (err, res, body) => {
-		callback(err, setPatient(JSON.parse(body)));
+exports.getPatientById = (patientId , callback) => {
+	request(baseUrl + '/' + patientId, (err, res, body) => {
+		callback(err, _setPatient(JSON.parse(body)));
 	});
 };
 
-exports.queryPatients = (test, callback) => {
+exports.queryPatients = (query, callback) => {
 	exports.getAllPatients((err, patients) => {
-		callback(err, patients.filter(patient=> test(patient)));
+		callback(err, patients.filter(patient => query(patient)));
 	});
 }; 
 
