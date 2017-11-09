@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {selectPatient} from '../actions/selectPatientAction.js';
-import {axiosFetch} from '../actions/axiosFetchAction.js';
+import {axiosFetcher} from '../actions/axiosFetchAction.js';
 import axios from 'axios';
 
 class PatientList extends React.Component {
@@ -16,8 +16,7 @@ class PatientList extends React.Component {
   componentWillMount() {
     axios.get('/patients')
       .then(response => {
-        console.log('WILL MOUNT DATA: ', response);
-        this.props.axiosFetch(response.data)
+        this.props.axiosFetcher(response.data)
       })
       .catch(err => {if(err) { throw err }})
   }
@@ -25,8 +24,8 @@ class PatientList extends React.Component {
   componentWillReceiveProps(props) {
     if(props.queryPatient !== null) {
       this.setState({list: props.queryPatient})
-    } else if(props.axiosFetcher.patients !== null) {
-      this.setState({list: props.axiosFetcher.patients})
+    } else if(props.axiosFetcherResults.patients !== null) {
+      this.setState({list: props.axiosFetcherResults.patients})
     }
   }
 
@@ -52,12 +51,12 @@ function mapStateToProps(state) {
   return {
     patients: state.patients,
     queryPatient: state.queryPatient,
-    axiosFetcher: state.axiosFetcher
+    axiosFetcherResults: state.axiosFetcher
   }
 }
 
 function matchDispatchToProps(dispatch) {
-  return bindActionCreators({selectPatient: selectPatient, axiosFetch: axiosFetch}, dispatch)
+  return bindActionCreators({selectPatient: selectPatient, axiosFetcher: axiosFetcher}, dispatch)
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(PatientList);
