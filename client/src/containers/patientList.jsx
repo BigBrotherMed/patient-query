@@ -2,6 +2,7 @@ import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {selectPatient} from '../actions/selectPatientAction.js';
+// import fhirpatients from '../../../api-data/index.js'; why won't this work?
 
 class PatientList extends React.Component {
   constructor(props) {
@@ -10,6 +11,10 @@ class PatientList extends React.Component {
       list: this.props.patients
     }
   }
+
+  // componentWillMount() {
+  //   fhirpatients.getAllPatients((err, data) => console.log(data));
+  // }
 
   componentWillReceiveProps(props) {
     if(props.queryPatient !== null) {
