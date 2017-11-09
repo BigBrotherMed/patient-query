@@ -4,8 +4,21 @@ import {connect} from 'react-redux';
 import {selectPatient} from '../actions/selectPatientAction.js';
 
 class PatientList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      list: this.props.patients
+    }
+  }
+
+  componentWillReceiveProps(props) {
+    if(props.queryPatient !== null) {
+      this.setState({list: props.queryPatient})
+    }
+  }
+
   createListItems() {
-    return this.props.patients.map(user => {
+    return this.state.list.map(user => {
       return (
         <li key={user.id} onClick={() => this.props.selectPatient(user)}>{user.name}</li>
       );
@@ -24,7 +37,8 @@ class PatientList extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    patients: state.patients
+    patients: state.patients,
+    queryPatient: state.queryPatient
   }
 }
 

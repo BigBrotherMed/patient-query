@@ -1,7 +1,6 @@
-export const queryPatient = query => {
-  console.log(`SUBMIT QUERY ${JSON.stringify(query)}`);
+export const queryPatient = (query, fullList) => {
   return {
     type: "SUBMIT_QUERY",
-    payload: query
+    payload: {query: query, patients: fullList}
   }
 }
