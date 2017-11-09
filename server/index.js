@@ -13,8 +13,22 @@ app.use(parser.json());
 app.use(parser.urlencoded({extended: true}));
 app.use(express.static(path.resolve(__dirname, '../client/public')));
 
+// app.get('/patients', (req, res) => {
+//   fhir.getAllPatients(err, patients) => {
+//   	console.log('server GET/patients, records:', patients.length);
+//   	res.status(200).send(JSON.stringify({patients: patients}))
+//   }
+// });
+
+// app.get('/medication-orders', (req, res) => {
+//   fhir.getAllMedicationOrders(err, orders) => {
+//   	console.log('server GET/orders, records:', orders.length);
+//   	res.status(200).send(JSON.stringify({orders: orders}))
+//   }
+// });
 
 app.listen(PORT, function(err) {
   if(err) { throw err }
   console.log('listening on port ', PORT);
 });
+
