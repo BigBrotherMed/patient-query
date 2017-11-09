@@ -23,6 +23,8 @@ class Query extends React.Component {
       <div>
         <input value={this.state.firstName} onChange={this.handleFirstNameChange} placeholder="First Name" />
         <button onClick={() => this.props.queryPatient(this.state, this.props.patients)}> Query </button>
+        <button onClick={() => this.props.queryPatient({firstName: ''}, this.props.patients)}> Clear </button>
+
 
       </div>
 
