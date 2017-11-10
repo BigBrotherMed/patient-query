@@ -30,9 +30,10 @@ class PatientNotes extends React.Component {
     }).then(response => {
       let newPayload = {
         patient: this.props.patient.patient,
-        notes: response.data
+        notes: response.data,
+        medication: this.props.patient.medication
       };
-      this.props.saveNote(newPayload);
+        this.props.saveNote(newPayload);
     }).catch(err => {
       console.log(err);
     });
