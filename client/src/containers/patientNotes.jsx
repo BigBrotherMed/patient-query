@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {saveNote} from '../actions/saveNoteAction.js';
 import axios from 'axios';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
 class PatientNotes extends React.Component {
   constructor(props) {
@@ -44,10 +45,12 @@ class PatientNotes extends React.Component {
   render() {
     return (
       <div>
-        <h4>Patient Notes:</h4>
-        {this.props.patient.notes.map(note => {
-          return <li key={note.id}>{note.note}</li>
-        })}
+        <h4>Patient Notes</h4>
+        <ListGroup>
+          {this.props.patient.notes.map(note => {
+            return <ListGroupItem key={note.id}>{note.note}</ListGroupItem>
+          })}
+        </ListGroup>
         <input value={this.state.noteEditor} onChange={this.handleChange}/>
         <button type="button" onClick={this.prepToSave}>Save note</button>
       </div>
