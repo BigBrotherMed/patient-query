@@ -10,8 +10,10 @@ const PatientMedOrders = (props) => {
 
   return (
     <div>
+      <h4>Current Medication</h4>
       {props.medication.map(order => 
         <div key={order.idMedication}>
+          <hr />
           <p>{order.medicationText}</p>
           <p>Dosage: {order.dosageInstruction}</p>
           <p>Frequency: {order.dosageFrequency}</p> 
