@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run db && npm run server",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "react": "webpack -d --watch",
+    "server": "nodemon server/index.js",
+    "db": "mysql -u root <db/schema.sql"
   },
   "repository": {
     "type": "git",
