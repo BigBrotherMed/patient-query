@@ -51,14 +51,12 @@ app.get('/medication_orders', (req, res) => {
 });
 
 app.get('/notes', (req, res) => {
-	//TODO: link up so you can specify patientId
-	sequelize.getNotes(req.body.patientId, (allNotes) => {
+	sequelize.getNotes(req.query.id, (allNotes) => {
 		res.json(allNotes);
 	})
 });
 
 app.post('/notes', (req, res) => {
-	console.log(`*****patientId:${req.body.patientId} || note:${req.body.note}`)
 	sequelize.addNote(req.body.patientId, req.body.note, allNotes => {
 		res.json(allNotes);
 	})

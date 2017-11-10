@@ -11,6 +11,7 @@ class PatientList extends React.Component {
     this.state = {
       list: this.props.patients
     }
+    this.prepBeforeActivePatientChange = this.prepBeforeActivePatientChange.bind(this);
   }
 
   componentWillMount() {
@@ -29,10 +30,25 @@ class PatientList extends React.Component {
     }
   }
 
+  prepBeforeActivePatientChange(user) {
+    const payloadObj = {};
+    let queryUrl = '/notes?id='+user.id;
+    axios.get(queryUrl)
+    .then(notes => {
+      payloadObj.notes = notes.data;
+      let queryUrl = '/patients?id=' + user.id;
+      axios.get(queryUrl)
+      .then(patient => {        
+        payloadObj.patient = patient.data.patient;
+        this.props.selectPatient(payloadObj);
+      })
+    })
+  }
+
   createListItems() {
     return this.state.list.map(user => {
       return (
-        <li key={user.id} onClick={() => this.props.selectPatient(user)}>{user.firstName} {user.lastName}</li>
+        <li key={user.id} onClick={() => this.prepBeforeActivePatientChange(user)}>{user.firstName} {user.lastName}</li>
       );
     })
   }

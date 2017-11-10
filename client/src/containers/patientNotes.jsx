@@ -8,12 +8,11 @@ class PatientNotes extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      noteEditor: '',
-      currentNotes: []
+      noteEditor: ''
     }
     this.handleChange = this.handleChange.bind(this);
     this.prepToSave = this.prepToSave.bind(this);
-    console.log(this.props.patientId);
+    console.log('**FROM PATIENT NOTES ALLNOTES',this.props.allNotes);
   }
 
   onComponentDidMount() {
@@ -33,22 +32,19 @@ class PatientNotes extends React.Component {
   prepToSave(e) {
     e.preventDefault();
 
-    let noteToSave = this.state.currentNotes.slice();
-    noteToSave.push(this.state.noteEditor);
     this.props.saveNote(this.state.noteEditor);
 
     axios.post('/notes', {
-      patientId: this.props.patient.id,
+      patientId: this.props.patient.patient.id,
       note: this.state.noteEditor
     }).then(response => {
-      console.log(response);
+      console.log('**AFTER SAVING NOTE',response);
     }).catch(err => {
       console.log(err);
     });
 
     this.setState({
-      noteEditor: '',
-      currentNotes: noteToSave
+      noteEditor: ''
     });
   } 
 
@@ -56,8 +52,8 @@ class PatientNotes extends React.Component {
     return (
       <div>
         <h4>Patient Notes:</h4>
-        {this.state.currentNotes.map( (note, index) => {
-          return <li key={index}>{note}</li>
+        {this.props.allNotes.map(note => {
+          return <li key={note.id}>{note.note}</li>
         })}
         <input value={this.state.noteEditor} onChange={this.handleChange}/>
         <button type="button" onClick={this.prepToSave}>Save note</button>

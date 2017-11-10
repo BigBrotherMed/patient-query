@@ -5,7 +5,7 @@ import PatientNotes from './patientNotes.jsx';
 class PatientDetails extends React.Component {
 
   render() {
-    if (!this.props.patient)
+    if (!this.props.activePatient)
       return (
         <div>
           <h3>Patient Details</h3>
@@ -16,14 +16,15 @@ class PatientDetails extends React.Component {
     return (
       <div>
         <h3>Patient Details</h3>
-        <p>First name: {this.props.patient.firstName}</p>
-        <p>Last name: {this.props.patient.lastName}</p>
-        <p>Birthdate: {this.props.patient.birthdate}</p>
-        <p>Gender: {this.props.patient.gender}</p>
-        <p>Street: {this.props.patient.address}</p>
-        <p>City: {this.props.patient.city}</p>
-        <p>Zip: {this.props.patient.zip}</p>
-        <PatientNotes />
+        <p>First name: {this.props.activePatient.patient.firstName}</p>
+        <p>Last name: {this.props.activePatient.patient.lastName}</p>
+        <p>Birthdate: {this.props.activePatient.patient.birthdate}</p>
+        <p>Gender: {this.props.activePatient.patient.gender}</p>
+        <p>Street: {this.props.activePatient.patient.address}</p>
+        <p>City: {this.props.activePatient.patient.city}</p>
+        <p>Zip: {this.props.activePatient.patient.zip}</p>
+        <p>Email: {this.props.activePatient.patient.email}</p>
+        <PatientNotes allNotes={this.props.activePatient.notes}/>
       </div>
     );
   }
@@ -32,7 +33,7 @@ class PatientDetails extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    patient: state.activePatient 
+    activePatient: state.activePatient
   }
 }
 
