@@ -12,7 +12,7 @@ const PORT = 5000;
 app.use(parser.json());
 app.use(parser.urlencoded({extended: true}));
 app.use(express.static(path.resolve(__dirname, '../client/public')));
-app.set('port', (process.env.PORT || 5000));ß
+app.set('port', (process.env.PORT || 5000));
 // app.listen(PORT, function(err) {
 //   if(err) { throw err }
 //   console.log('listening on port ', PORT);
