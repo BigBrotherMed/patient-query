@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PatientNotes from './patientNotes.jsx';
+import PatientMedOrders from './patientMedOrders.jsx';
 
 class PatientDetails extends React.Component {
 
@@ -25,6 +26,7 @@ class PatientDetails extends React.Component {
         <p>Zip: {this.props.activePatient.patient.zip}</p>
         <p>Email: {this.props.activePatient.patient.email}</p>
         <PatientNotes allNotes={this.props.activePatient.notes}/>
+        <PatientMedOrders medication={this.props.activePatient.medication}/>
       </div>
     );
   }
