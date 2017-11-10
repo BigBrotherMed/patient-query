@@ -1,7 +1,6 @@
-export const saveNote = noteText => {
-  console.log(`You are trying to save note: ${noteText}`);
+export const saveNote = payloadObj => {
     return {
-      type: "SAVE_NOTE",
-      payload: noteText
+      type: "UPDATE_NOTES",
+      payload: payloadObj
     }
 }

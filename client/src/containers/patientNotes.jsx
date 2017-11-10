@@ -12,15 +12,6 @@ class PatientNotes extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.prepToSave = this.prepToSave.bind(this);
-    console.log('**FROM PATIENT NOTES ALLNOTES',this.props.allNotes);
-  }
-
-  onComponentDidMount() {
-    axios.get('/notes', {patientId:this.props.patient.id})
-    .then(notes => {
-      console.log('*&^*&^*&^notes', notes)
-      this.setState = {currentNotes:notes}
-    });
   }
 
   handleChange(e) {
@@ -32,13 +23,15 @@ class PatientNotes extends React.Component {
   prepToSave(e) {
     e.preventDefault();
 
-    this.props.saveNote(this.state.noteEditor);
-
     axios.post('/notes', {
       patientId: this.props.patient.patient.id,
       note: this.state.noteEditor
     }).then(response => {
-      console.log('**AFTER SAVING NOTE',response);
+      let newPayload = {
+        patient: this.props.patient.patient,
+        notes: response.data
+      };
+      this.props.saveNote(newPayload);
     }).catch(err => {
       console.log(err);
     });
@@ -52,7 +45,7 @@ class PatientNotes extends React.Component {
     return (
       <div>
         <h4>Patient Notes:</h4>
-        {this.props.allNotes.map(note => {
+        {this.props.patient.notes.map(note => {
           return <li key={note.id}>{note.note}</li>
         })}
         <input value={this.state.noteEditor} onChange={this.handleChange}/>
