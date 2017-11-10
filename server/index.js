@@ -5,6 +5,7 @@ const parser = require('body-parser');
 const request = require('request');
 const fhir = require('../api-data/index.js');
 const sequelize = require('../db/controller.js');
+const router = require('./routes.js');
 
 const app = express();
 const PORT = 5000;
@@ -17,6 +18,8 @@ app.set('port', (process.env.PORT || 5000));
 //   if(err) { throw err }
 //   console.log('listening on port ', PORT);
 // });
+
+app.use('/*', router);
 
 app.get('/patients', (req, res) => {
 	if (Object.keys(req.query).length === 0) {
