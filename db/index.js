@@ -19,28 +19,6 @@ const Note = sequelize.define('note', {
   note: Sequelize.STRING(500)
 })
 
-sequelize.sync().then(() => {
-  let seedData = [
-    {
-      patientId: 1,
-      note: "Patient ID 1's test note"
-    },
-    {
-      patientId: 2,
-      note: "Patient ID 2's test note"      
-    },
-    {
-      patientId: 3,
-      note: "Patient ID 3's test note"     
-    },
-    {
-      patientId: 3,
-      note: "Patient ID 3's second test note"                 
-    }
-  ]
-  Note.destroy({where:{}}).done(() => {
-    Note.bulkCreate(seedData);
-  });
-});
+sequelize.sync();
 
 module.exports = sequelize;
