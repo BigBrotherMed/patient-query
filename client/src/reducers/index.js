@@ -8,7 +8,7 @@ const allReducers = combineReducers({
   patients: patientReducer,
   activePatient: activePatientReducer,
   queryPatient: queryPatientReducer,
-  axiosFetcher: axiosFetcherReducer
+  axiosFetcher: axiosFetcherReducer,
 });
 
 export default allReducers;

@@ -22,8 +22,8 @@ class Query extends React.Component {
     return (
       <div>
         <input value={this.state.firstName} onChange={this.handleFirstNameChange} placeholder="First Name" />
-        <button onClick={() => this.props.queryPatient(this.state, this.props.patients)}> Query </button>
-        <button onClick={() => this.props.queryPatient({firstName: ''}, this.props.patients)}> Clear </button>
+        <button onClick={() => this.props.queryPatient(this.state, this.props.axiosFetcherResults.patients)}> Query </button>
+        <button onClick={() => this.props.queryPatient({firstName: ''}, this.props.axiosFetcherResults.patients)}> Clear </button>
 
 
       </div>
@@ -36,7 +36,8 @@ class Query extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    patients: state.patients
+    patients: state.patients,
+    axiosFetcherResults: state.axiosFetcher
   }
 }
 
