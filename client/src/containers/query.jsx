@@ -21,15 +21,11 @@ class Query extends React.Component {
   render() {
     return (
       <div>
+        <h4>Filter</h4>
         <input value={this.state.firstName} onChange={this.handleFirstNameChange} placeholder="First Name" />
         <button onClick={() => this.props.queryPatient(this.state, this.props.axiosFetcherResults.patients)}> Query </button>
         <button onClick={() => this.props.queryPatient({firstName: ''}, this.props.axiosFetcherResults.patients)}> Clear </button>
-
-
       </div>
-
-
-
     )
   }
 }
