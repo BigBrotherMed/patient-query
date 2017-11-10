@@ -2,13 +2,13 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {saveNote} from '../actions/saveNoteAction.js';
+import axios from 'axios';
 
 class PatientNotes extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      noteEditor: '',
-      currentNotes: ['note1', 'note2', 'note3']
+      noteEditor: ''
     }
     this.handleChange = this.handleChange.bind(this);
     this.prepToSave = this.prepToSave.bind(this);
@@ -22,13 +22,22 @@ class PatientNotes extends React.Component {
 
   prepToSave(e) {
     e.preventDefault();
-    console.log(this.state.noteEditor);
-    let noteToSave = this.state.currentNotes.slice();
-    noteToSave.push(this.state.noteEditor);
-    this.props.saveNote(this.state.noteEditor);
+
+    axios.post('/notes', {
+      patientId: this.props.patient.patient.id,
+      note: this.state.noteEditor
+    }).then(response => {
+      let newPayload = {
+        patient: this.props.patient.patient,
+        notes: response.data
+      };
+      this.props.saveNote(newPayload);
+    }).catch(err => {
+      console.log(err);
+    });
+
     this.setState({
-      noteEditor: '',
-      currentNotes: noteToSave
+      noteEditor: ''
     });
   } 
 
@@ -36,8 +45,8 @@ class PatientNotes extends React.Component {
     return (
       <div>
         <h4>Patient Notes:</h4>
-        {this.state.currentNotes.map( (note, index) => {
-          return <li key={index}>{note}</li>
+        {this.props.patient.notes.map(note => {
+          return <li key={note.id}>{note.note}</li>
         })}
         <input value={this.state.noteEditor} onChange={this.handleChange}/>
         <button type="button" onClick={this.prepToSave}>Save note</button>
@@ -46,8 +55,14 @@ class PatientNotes extends React.Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    patient: state.activePatient
+  }
+}
+
 function matchDispatchToProps(dispatch) {
   return bindActionCreators({saveNote: saveNote}, dispatch)
 }
 
-export default connect(null, matchDispatchToProps)(PatientNotes);
+export default connect(mapStateToProps, matchDispatchToProps)(PatientNotes);

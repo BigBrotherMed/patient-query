@@ -4,6 +4,7 @@ const path = require('path');
 const parser = require('body-parser');
 const request = require('request');
 const fhir = require('../api-data/index.js');
+const sequelize = require('../db/controller.js');
 
 const app = express();
 const PORT = 5000;
@@ -47,4 +48,16 @@ app.get('/medication_orders', (req, res) => {
 	  	res.status(200).send(JSON.stringify({orders: orders}));
 	  });
   }
+});
+
+app.get('/notes', (req, res) => {
+	sequelize.getNotes(req.query.id, (allNotes) => {
+		res.json(allNotes);
+	})
+});
+
+app.post('/notes', (req, res) => {
+	sequelize.addNote(req.body.patientId, req.body.note, allNotes => {
+		res.json(allNotes);
+	})
 });

@@ -12,10 +12,10 @@ exports.addNote = (patientId, note, callback) => {
   });
 }
 
-//Callback is invoked on success
+//Callback is invoked on success  
 exports.getNotes = (patientId, callback) => {
-  sequelize.models.note.findAll({where: {patientId:patientId}}).
-  done(allNotes => {
+  sequelize.models.note.findAll({where: {patientId:patientId}})
+  .done(allNotes => {
     callback(allNotes);
   })
 }
