@@ -1,18 +1,26 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('patientData', 'root', '', {
-  host: 'localhost',
-  dialect: 'mysql'
-});
+	let database = process.env.DATABASE_URL || 'patientdata'
+	let sequelize = ""
+
+	if (process.env.DATABASE_URL) {
+	    sequelize = new Sequelize(database)
+	}
+	else {
+		sequelize = new Sequelize(database, 'root', '', {
+		  host: 'localhost',
+		  dialect: 'mysql'
+		});
+	}
 
 sequelize
-.authenticate()
-.then(() => {
-  console.log('Sequelize authentication ok');
-})
-.catch(error => {
-  console.error('Error during authentication', error);
-});
+	.authenticate()
+	.then(() => {
+	  console.log('Sequelize authentication ok');
+	})
+	.catch(error => {
+	  console.error('Error during authentication', error);
+	});
 
 const Note = sequelize.define('note', {
   patientId: Sequelize.STRING,
@@ -22,3 +30,6 @@ const Note = sequelize.define('note', {
 sequelize.sync();
 
 module.exports = sequelize;
+
+ 
+
