@@ -12,11 +12,11 @@ const PORT = 5000;
 app.use(parser.json());
 app.use(parser.urlencoded({extended: true}));
 app.use(express.static(path.resolve(__dirname, '../client/public')));
-
-app.listen(PORT, function(err) {
-  if(err) { throw err }
-  console.log('listening on port ', PORT);
-});
+app.set('port', (process.env.PORT || 5000));ß
+// app.listen(PORT, function(err) {
+//   if(err) { throw err }
+//   console.log('listening on port ', PORT);
+// });
 
 app.get('/patients', (req, res) => {
 	if (Object.keys(req.query).length === 0) {
@@ -61,3 +61,8 @@ app.post('/notes', (req, res) => {
 		res.json(allNotes);
 	})
 });
+
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
+});
+
