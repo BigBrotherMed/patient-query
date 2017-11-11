@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import {selectPatient} from '../actions/selectPatientAction.js';
 import {axiosFetcher} from '../actions/axiosFetchAction.js';
 import axios from 'axios';
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, PageHeader, Col, Row, Well, Label } from 'react-bootstrap';
 
 class PatientList extends React.Component {
   constructor(props) {
@@ -57,19 +57,33 @@ class PatientList extends React.Component {
   createListItems() {
     return this.state.list.map(user => {
       return (
-        <ListGroupItem key={user.id} onClick={() => this.prepBeforeActivePatientChange(user)}>{user.firstName} {user.lastName}</ListGroupItem>
+        <ListGroupItem className="listEntry" key={user.id} onClick={() => this.prepBeforeActivePatientChange(user)}>
+          <Row>
+            <Col sm={5}>{ user.id.slice(6) }</Col>
+            <Col sm={7}>{ user.lastName }, { user.firstName } </Col>
+          </Row>
+        </ListGroupItem>
       );
     })
   }
 
   render() {
     return (
-      <div>
-        <h4>Patient List</h4>
-        <ListGroup>
+    
+        <ListGroup>        
+          <ListGroupItem className="listEntry">
+            <Row>
+              <h5>
+        
+                <Col sm={2}><h4><Label bsStyle="info">ID</Label></h4></Col>
+                <Col sm={3}></Col>
+                <Col sm={4}><h4><Label bsStyle="info">Name</Label></h4></Col>
+              </h5>
+            </Row>
+          </ListGroupItem>
           {this.createListItems()}
         </ListGroup>
-      </div>
+   
     )
   }
 }

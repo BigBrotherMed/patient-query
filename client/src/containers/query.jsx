@@ -2,30 +2,34 @@ import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {queryPatient} from '../actions/queryPatientName.js';
+import { Col, Row, Well } from 'react-bootstrap';
 
 class Query extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      firstName: ''
+      lastName: ''
     }
-    this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
+    this.handleLastNameChange = this.handleLastNameChange.bind(this);
   }
 
-  handleFirstNameChange(event) {
-    this.setState({firstName: event.target.value});
+  handleLastNameChange(event) {
+    this.setState({lastName: event.target.value});
   }
   
 
   render() {
     return (
-      <div>
-        <h4>Filter</h4>
-        <input value={this.state.firstName} onChange={this.handleFirstNameChange} placeholder="First Name" />
-        <button onClick={() => this.props.queryPatient(this.state, this.props.axiosFetcherResults.patients)}> Query </button>
-        <button onClick={() => this.props.queryPatient({firstName: ''}, this.props.axiosFetcherResults.patients)}> Clear </button>
-      </div>
+        <Row>
+          <Col sm={1}></Col>
+          <Col sm={10}>
+            <input value={this.state.lastName} onChange={this.handleLastNameChange} placeholder="Last Name" />
+            <button onClick={() => this.props.queryPatient(this.state, this.props.axiosFetcherResults.patients)}> Search </button>
+            <button onClick={() => this.props.queryPatient({lastName: ''}, this.props.axiosFetcherResults.patients)}> Clear </button>
+          </Col>
+        </Row>
+
     )
   }
 }

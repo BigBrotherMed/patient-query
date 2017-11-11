@@ -2,32 +2,61 @@ import React from 'react';
 import {connect} from 'react-redux';
 import PatientNotes from './patientNotes.jsx';
 import PatientMedOrders from './patientMedOrders.jsx';
+import { ListGroup, ListGroupItem, Row, Col, Label, Well } from 'react-bootstrap';
+
 
 class PatientDetails extends React.Component {
 
   render() {
     if (!this.props.activePatient)
       return (
-        <div>
-          <h3>Patient Details</h3>
-          <p>No patient selected</p>
-        </div>
+        <Well>
+          <h5>Select a Patient to view Details </h5>
+        </Well>
       );
       
     return (
-      <div>
-        <h3>Patient Details</h3>
-        <p>First name: {this.props.activePatient.patient.firstName}</p>
-        <p>Last name: {this.props.activePatient.patient.lastName}</p>
-        <p>Birthdate: {this.props.activePatient.patient.birthdate}</p>
-        <p>Gender: {this.props.activePatient.patient.gender}</p>
-        <p>Street: {this.props.activePatient.patient.address}</p>
-        <p>City: {this.props.activePatient.patient.city}</p>
-        <p>Zip: {this.props.activePatient.patient.zip}</p>
-        <p>Email: {this.props.activePatient.patient.email}</p>
+      <Well>
+        <ListGroup>
+          <ListGroupItem>
+            <Row>
+              <Col sm={6}><h4><Label bsStyle="info">First name</Label>  {this.props.activePatient.patient.firstName}</h4></Col>
+              <Col sm={6}><h4><Label bsStyle="info">Last name</Label>  {this.props.activePatient.patient.lastName}</h4></Col>
+            </Row>
+          </ListGroupItem>
+          <ListGroupItem>
+            <Row>
+              <Col sm={6}><h4><Label bsStyle="info">Birthdate</Label>  {this.props.activePatient.patient.birthdate}</h4></Col>
+              <Col sm={6}><h4><Label bsStyle="info">Gender</Label>  {this.props.activePatient.patient.gender}</h4></Col>
+            </Row>
+          </ListGroupItem>
+          <ListGroupItem>
+            <Row>
+              <Col sm={12}><h4><Label bsStyle="info">Street</Label>  {this.props.activePatient.patient.address}</h4></Col>
+            </Row>
+          </ListGroupItem>
+          <ListGroupItem>
+            <Row>
+              <Col sm={6}><h4><Label bsStyle="info">City</Label>  {this.props.activePatient.patient.city}</h4></Col>
+              <Col sm={6}><h4><Label bsStyle="info">Zip</Label>  {this.props.activePatient.patient.zip}</h4></Col>
+            </Row>
+          </ListGroupItem>
+          <ListGroupItem>
+            <Row>
+              <Col sm={12}><h4><Label bsStyle="info">Phone</Label>  {this.props.activePatient.patient.phone}</h4></Col>
+            </Row>
+          </ListGroupItem>
+          <ListGroupItem>
+            <Row>
+              <Col sm={12}><h4><Label bsStyle="info">Email</Label>  {this.props.activePatient.patient.email}</h4></Col>
+            </Row>
+          </ListGroupItem>
+        </ListGroup>
+
+
         <PatientNotes allNotes={this.props.activePatient.notes}/>
         <PatientMedOrders medication={this.props.activePatient.medication}/>
-      </div>
+      </Well>
     );
   }
 

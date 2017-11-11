@@ -3,7 +3,7 @@ import Query from '../containers/query.jsx';
 import PatientList from '../containers/patientList.jsx';
 import PatientDetails from '../containers/patientDetails.jsx';
 import { Grid, Navbar, Jumbotron, Button } from 'react-bootstrap';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, PageHeader, Well } from 'react-bootstrap';
 
 class App extends Component {
   render() {
@@ -21,16 +21,23 @@ class App extends Component {
         </Navbar>
         <Jumbotron>       
        	 	<Grid>
+       	 		
 				    <Row>
-				      <Col sm={4}>
-				      	<Row><PatientList /></Row>
-				      	<Row><Query /></Row>
+				      <Col sm={5}>
+				      	<Well>
+				      		<PageHeader><small>Patient List</small></PageHeader>
+					      	<Well><Row><Query /></Row></Well>
+					      	<Row><PatientList /></Row>
+					      </Well>
 				      </Col>
-				      <Col sm={1}></Col>
 				      <Col sm={7}>
-				      	<Row><PatientDetails /></Row>
-				      </Col>			      
+				      	<Well>
+					      	<PageHeader><small>Patient Details</small></PageHeader>
+					      	<Row><PatientDetails /></Row>
+					      </Well>
+				      </Col>		      
 				    </Row>
+				    
 				  </Grid>
 				</Jumbotron>
       </div>
