@@ -3,7 +3,7 @@ export default function(state=null, action) {
     case "SUBMIT_QUERY":
       let results =[];
       for(let i = 0; i < action.payload.patients.length; i++) {
-        if(action.payload.patients[i].firstName.includes(action.payload.query.firstName)) {
+        if(action.payload.patients[i].lastName.includes(action.payload.query.lastName)) {
           results.push(action.payload.patients[i]);
         }
       }
