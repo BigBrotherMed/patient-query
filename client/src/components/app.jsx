@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Query from '../containers/query.jsx';
 import PatientList from '../containers/patientList.jsx';
-import PatientDetails from '../containers/patientDetails.jsx';
+import PatientDetailsMasterContainer from '../containers/PatientDetailsMasterContainer.jsx';
 import { Grid, Navbar, Jumbotron, Button } from 'react-bootstrap';
 import { Row, Col, PageHeader, Well } from 'react-bootstrap';
 
@@ -33,7 +33,7 @@ class App extends Component {
 				      <Col sm={7}>
 				      	<Well>
 					      	<PageHeader><small>Patient Details</small></PageHeader>
-					      	<Row><PatientDetails /></Row>
+					      	<Row><PatientDetailsMasterContainer /></Row>
 					      </Well>
 				      </Col>		      
 				    </Row>
