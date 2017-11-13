@@ -66,8 +66,8 @@ class PatientList extends React.Component {
             bsStyle="info" key={user.id} 
             onClick={() => this.prepBeforeActivePatientChange(user)}>
           <Row>
-            <Col sm={1}></Col>
-            <Col sm={3}>{ user.id.slice(6) }</Col>
+ 
+            <Col sm={4}>{ user.id.slice(6) }</Col>
             <Col sm={8}>{ user.lastName }, { user.firstName } </Col>
           </Row>
         </ListGroupItem>
@@ -81,8 +81,8 @@ class PatientList extends React.Component {
             <ListGroup>        
               <ListGroupItem className="listEntry" bsStyle="info">
                 <Row>
-                  <Col sm={1}></Col>
-                  <Col sm={3}><Button bsStyle="primary" bsSize="small">Sort by ID</Button></Col>
+   
+                  <Col sm={4}><Button bsStyle="primary" bsSize="small">Sort by ID</Button></Col>
                   <Col sm={8}><Button bsStyle="primary" bsSize="small">Sort by Name</Button></Col>
                 </Row>
               </ListGroupItem>

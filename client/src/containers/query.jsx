@@ -22,14 +22,14 @@ class Query extends React.Component {
     return (
       <Grid>
         <Row>
-          <Col sm={8}>
-            <FormControl type="text"
+          <Col sm={6}>
+            <FormControl type="text" bsSize="small"
               value={this.state.lastName}
               placeholder="Enter Last Name"
               onChange={this.handleLastNameChange}
             />
           </Col>
-          <Col sm={4}>
+          <Col sm={6}>
             <ButtonToolbar>
               <Button bsStyle="primary" bsSize="small" onClick={() => 
                 this.props.queryPatient(this.state, this.props.axiosFetcherResults.patients)}> 
