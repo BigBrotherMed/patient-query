@@ -74,8 +74,8 @@ class PatientNotes extends React.Component {
             <ListGroupItem className="listEntry" key={note.id} bsStyle="danger">
               <Row>
                 <Col sm={1}></Col>
-                <Col sm={3}><Label bsStyle="danger">Date</Label></Col>
-                <Col sm={8}>{ note.note } </Col>
+                <Col sm={3}><h4><Label bsStyle="danger">{note.createdAt.slice(0, 10)}</Label></h4></Col>
+                <Col sm={8}><h5>{ note.note }</h5> </Col>
               </Row>
             </ListGroupItem>
           )}
