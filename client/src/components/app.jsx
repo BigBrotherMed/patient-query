@@ -20,7 +20,7 @@ class App extends Component {
         <Jumbotron>       
        	 	<Grid>	 		
 				    <Row>
-				      <Col sm={6}>
+				      <Col sm={5}>
 				      	<Well>
                   <Well>
                     <Row>
@@ -34,7 +34,7 @@ class App extends Component {
                   <Well><PatientList /></Well>
 					      </Well>           
 				      </Col>
-				      <Col sm={6}>
+				      <Col sm={7}>
 				      	<Well>
                   <Well>
                     <Row>
