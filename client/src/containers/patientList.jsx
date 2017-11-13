@@ -62,7 +62,9 @@ class PatientList extends React.Component {
   createListItems() {
     return this.state.list.map(user => {
       return (
-        <ListGroupItem className="listEntry" key={user.id} onClick={() => this.prepBeforeActivePatientChange(user)}>
+        <ListGroupItem className="listEntry" 
+            bsStyle="info" key={user.id} 
+            onClick={() => this.prepBeforeActivePatientChange(user)}>
           <Row>
             <Col sm={1}></Col>
             <Col sm={3}>{ user.id.slice(6) }</Col>
@@ -77,7 +79,7 @@ class PatientList extends React.Component {
     return (
 
             <ListGroup>        
-              <ListGroupItem className="listEntry">
+              <ListGroupItem className="listEntry" bsStyle="info">
                 <Row>
                   <Col sm={1}></Col>
                   <Col sm={3}><Button bsStyle="primary" bsSize="small">Sort by ID</Button></Col>

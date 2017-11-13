@@ -3,7 +3,7 @@ import Query from '../containers/query.jsx';
 import PatientList from '../containers/patientList.jsx';
 import PatientDetailsMasterContainer from '../containers/PatientDetailsMasterContainer.jsx';
 import { Grid, Navbar, Jumbotron, Button } from 'react-bootstrap';
-import { Row, Col, PageHeader, Well } from 'react-bootstrap';
+import { Row, Col, PageHeader, Well, Label } from 'react-bootstrap';
 
 class App extends Component {
   render() {
@@ -26,7 +26,7 @@ class App extends Component {
                     <Row>
                       <Col sm={1}></Col>
                       <Col sm={11}>
-                        <PageHeader><small>Patient List</small></PageHeader>
+                        <h2><Label bsStyle="primary">Patient List</Label></h2>
                       </Col>
                     </Row>
                   </Well>
@@ -40,7 +40,7 @@ class App extends Component {
                     <Row>
                       <Col sm={1}></Col>
                       <Col sm={11}>
-                        <PageHeader><small>Patient Details</small></PageHeader>
+                        <h2><Label bsStyle="primary">Patient Details</Label></h2>
                       </Col>
                     </Row>
                   </Well>

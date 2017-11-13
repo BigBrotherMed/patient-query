@@ -14,13 +14,13 @@ const PatientMedOrders = (props) => {
       {props.medication.map(order => 
         <div key={order.idMedication}>
           <ListGroup>
-            <ListGroupItem>
+            <ListGroupItem bsStyle="warning">
               <Row>
                 <Col sm={3}><Label bsStyle="warning">Medication</Label></Col>
                 <Col sm={7}>{order.medicationText}</Col>
               </Row>
             </ListGroupItem>
-            <ListGroupItem>
+            <ListGroupItem bsStyle="warning">
               <Row>
                 <Col sm={6}><Label bsStyle="warning">Dosage</Label>  {order.dosageInstruction}</Col>
                 <Col sm={6}><Label bsStyle="warning">Frequency</Label>  {order.dosageFrequency}</Col>

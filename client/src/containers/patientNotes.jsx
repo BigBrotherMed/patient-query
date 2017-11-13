@@ -65,7 +65,7 @@ class PatientNotes extends React.Component {
       </Well>
       <ListGroup>
         {this.props.patient.notes.map(note => 
-          <ListGroupItem key={note.id}>
+          <ListGroupItem className="listEntry" key={note.id} bsStyle="danger">
             <Row>
               <Col sm={1}></Col>
               <Col sm={3}><Label bsStyle="danger">Date</Label></Col>

@@ -22,7 +22,13 @@ class Query extends React.Component {
     return (
       <Grid>
         <Row>
-
+          <Col sm={8}>
+            <FormControl type="text"
+              value={this.state.lastName}
+              placeholder="Enter Last Name"
+              onChange={this.handleLastNameChange}
+            />
+          </Col>
           <Col sm={4}>
             <ButtonToolbar>
               <Button bsStyle="primary" bsSize="small" onClick={() => 
@@ -34,18 +40,6 @@ class Query extends React.Component {
                 Clear 
               </Button>
             </ButtonToolbar>
-          </Col>
-          <Col sm={8}>
-
-            <FormControl
-              type="text"
-              value={this.state.lastName}
-              placeholder="Enter Last Name"
-              onChange={this.handleLastNameChange}
-            />
-
-  
-
           </Col>
         </Row>
       </Grid>

@@ -40,6 +40,16 @@ class PatientDetailsMasterContainer extends React.Component {
         <Row>
           <Well>
             <Row>
+              <Col sm={6}>
+                <ListGroupItem bsStyle="info">
+                  
+                    {this.props.activePatient ? 
+                      this.props.activePatient.patient.lastName + ', ' + 
+                      this.props.activePatient.patient.firstName 
+                      : null}
+                  
+                </ListGroupItem>
+              </Col>
              <Col sm={6}>
                 <ButtonToolbar>
                   <Button onClick={ this.viewDetails } bsSize="small" bsStyle="primary"> Details </Button>
@@ -48,15 +58,7 @@ class PatientDetailsMasterContainer extends React.Component {
                              
                 </ButtonToolbar>
               </Col>
-              <Col sm={6}>
-                <h4>
-                  <Label bsStyle="primary">
-                    {this.props.activePatient ? 
-                      this.props.activePatient.patient.firstName + ' ' + this.props.activePatient.patient.lastName 
-                      : null}
-                  </Label>
-                </h4>
-              </Col>
+
             </Row>
           </Well>
           <Well>
