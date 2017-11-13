@@ -5,7 +5,7 @@ const PatientMedOrders = (props) => {
   if (!props.medication || props.medication.length === 0)
     return (
       <div>
-        <p>No current medication orders for this patient</p>
+        <h4>No Medication Orders for this Patient</h4>
       </div>
     );
 
@@ -16,8 +16,8 @@ const PatientMedOrders = (props) => {
           <ListGroup>
             <ListGroupItem bsStyle="warning">
               <Row>
-                <Col sm={3}><Label bsStyle="warning">Medication</Label></Col>
-                <Col sm={7}>{order.medicationText}</Col>
+                <Col sm={2}><Label bsStyle="warning">Medication</Label></Col>
+                <Col sm={10}>{order.medicationText}</Col>
               </Row>
             </ListGroupItem>
             <ListGroupItem bsStyle="warning">

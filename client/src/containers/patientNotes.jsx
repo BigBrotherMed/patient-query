@@ -49,9 +49,6 @@ class PatientNotes extends React.Component {
       <Well>
         <Grid>
           <Row>
-            <Col sm={3}>
-              <Button  bsSize="small" bsStyle="danger"onClick={this.prepToSave}>Save Note</Button>
-            </Col>
             <Col sm={9}>
               <FormControl
                 type="text"
@@ -60,22 +57,32 @@ class PatientNotes extends React.Component {
                 onChange={this.handleChange}
               />      
             </Col> 
+            <Col sm={3}>
+              <Button  bsSize="small" bsStyle="danger"onClick={this.prepToSave}>Save Note</Button>
+            </Col>
+     
           </Row>
         </Grid>
       </Well>
-      <ListGroup>
-        {this.props.patient.notes.map(note => 
-          <ListGroupItem className="listEntry" key={note.id} bsStyle="danger">
-            <Row>
-              <Col sm={1}></Col>
-              <Col sm={3}><Label bsStyle="danger">Date</Label></Col>
-              <Col sm={8}>{ note.note } </Col>
-            </Row>
-          </ListGroupItem>
-        )}
-      </ListGroup>
+      <Well>
+        {!this.props.patient.notes || this.props.patient.notes.length === 0 ?
+          <div><h4>No Notes for this Patient</h4></div> : null}
+
+
+        <ListGroup>
+          {this.props.patient.notes.map(note => 
+            <ListGroupItem className="listEntry" key={note.id} bsStyle="danger">
+              <Row>
+                <Col sm={1}></Col>
+                <Col sm={3}><Label bsStyle="danger">Date</Label></Col>
+                <Col sm={8}>{ note.note } </Col>
+              </Row>
+            </ListGroupItem>
+          )}
+        </ListGroup>
+      </Well>
     </div>
-      
+    
     )
   }
 }
