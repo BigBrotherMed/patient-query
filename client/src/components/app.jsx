@@ -24,7 +24,6 @@ class App extends Component {
 
   checkCredentials(credentials) {
     if (credentials.action === 'login') {
-      console.log('from app.jsx ', credentials);
       axios.get('/credentials', {
         params: {
           credentials: credentials
@@ -44,21 +43,19 @@ class App extends Component {
         credentials: credentials
       })
       .then(res => {
-        console.log('***from axios success', res);
         this.setState({
           loggedIn: true
         })
       })
       .catch(err => {
-        console.log('***from axios failure', err.response.status);
         const errCode = err.response.status;
 
         if (errCode === 422) {
-          console.log('username already exists');
+          console.error('username already exists');
         }
 
         if (errCode === 412) {
-          console.log('incorrect secret word');
+          console.error('incorrect secret word');
         }
       });
     }

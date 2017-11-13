@@ -58,19 +58,18 @@ class Login extends React.Component {
       } else {
         //TODO: error message for passwords not matching
         if (this.state.password !== this.state.verifyPassword) {
-          console.log('passwords don\'t match!');
+          console.error('passwords don\'t match!');
         }
 
         //TODO: error message for empty secret field
         if (this.state.secret === '') {
-          console.log('secret is empty');
+          console.error('secret is empty');
         }
       }
     } else {
       if (this.state.username === '' || this.state.password === '') {
-        console.log('please enter both a username and password');
+        console.error('please enter both a username and password');
       } else {
-        console.log('!@*!@^*!&^ BEFORE CHECK: ', credentials);
         this.props.checkCredentials(credentials);
       }
     }
@@ -112,7 +111,7 @@ class Login extends React.Component {
               onChange={this.usernameChange}
             /> 
             <FormControl
-              type="text"
+              type="password"
               value={this.state.password}
               placeholder="Password"
               onChange={this.passwordChange}
@@ -144,19 +143,19 @@ class Login extends React.Component {
               onChange={this.usernameChange}
             />  
             <FormControl
-              type="text"
+              type="password"
               value={this.state.password}
               placeholder="Choose a Password"
               onChange={this.passwordChange}
             />  
             <FormControl
-              type="text"
+              type="password"
               value={this.state.verifyPassword}
               placeholder="Retype Password"
               onChange={this.verifyPasswordChange}
             />  
             <FormControl
-              type="text"
+              type="password"
               value={this.state.secret}
               placeholder="Enter Secret Word"
               onChange={this.secretChange}

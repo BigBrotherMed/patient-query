@@ -35,7 +35,7 @@ class PatientNotes extends React.Component {
       };
         this.props.saveNote(newPayload);
     }).catch(err => {
-      console.log(err);
+      console.error(err);
     });
 
     this.setState({
