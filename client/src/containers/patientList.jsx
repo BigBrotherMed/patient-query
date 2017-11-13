@@ -82,8 +82,8 @@ class PatientList extends React.Component {
               <ListGroupItem className="listEntry" bsStyle="info">
                 <Row>
    
-                  <Col sm={4}><Button bsStyle="primary" bsSize="small">Sort by ID</Button></Col>
-                  <Col sm={8}><Button bsStyle="primary" bsSize="small">Sort by Name</Button></Col>
+                  <Col sm={4}><Button bsStyle="primary" bsSize="xsmall">Sort by ID</Button></Col>
+                  <Col sm={8}><Button bsStyle="primary" bsSize="xsmall">Sort by Name</Button></Col>
                 </Row>
               </ListGroupItem>
               {this.createListItems()}

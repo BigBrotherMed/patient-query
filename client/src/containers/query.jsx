@@ -31,11 +31,11 @@ class Query extends React.Component {
           </Col>
           <Col sm={6}>
             <ButtonToolbar>
-              <Button bsStyle="primary" bsSize="small" onClick={() => 
+              <Button bsStyle="primary" bsSize="xsmall" onClick={() => 
                 this.props.queryPatient(this.state, this.props.axiosFetcherResults.patients)}> 
                 Search 
               </Button>
-              <Button bsStyle="primary" bsSize="small" onClick={() => 
+              <Button bsStyle="primary" bsSize="xsmall" onClick={() => 
                 this.props.queryPatient({lastName: ''}, this.props.axiosFetcherResults.patients)}> 
                 Clear 
               </Button>
