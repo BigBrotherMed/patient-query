@@ -59,7 +59,6 @@ module.exports = {
 
   credentials: {
     get: (req, res, next) => {
-      console.log('*&^*&^server controller: ', req.query.credentials)
       sequelize.checkCredentials(req.query.credentials, valid => {
         if (valid) {
           res.json('success');
