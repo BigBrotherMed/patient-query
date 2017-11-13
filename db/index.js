@@ -25,6 +25,14 @@ sequelize
 const Note = sequelize.define('note', {
   patientId: Sequelize.STRING,
   note: Sequelize.STRING(500)
+});
+
+const Login = sequelize.define('login', {
+	username: Sequelize.STRING
+});
+
+const Credential = sequelize.define('credential', {
+	loginInfo: Sequelize.STRING
 })
 
 sequelize.sync();

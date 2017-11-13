@@ -31,7 +31,6 @@ exports.queryMedicationOrders = (queryString, callback) => {
 }; 
 
 const _setOrder = (data) => {
-	console.log('*****', data.dosageInstruction.length);
 	var dosage = data.dosageInstruction[0].timing.repeat;
 	const order = {
 		id: data.id,

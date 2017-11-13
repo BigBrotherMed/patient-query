@@ -2,10 +2,27 @@ import React, { Component } from 'react';
 import Query from '../containers/query.jsx';
 import PatientList from '../containers/patientList.jsx';
 import PatientDetailsMasterContainer from '../containers/PatientDetailsMasterContainer.jsx';
+import Login from '../containers/login.jsx';
 import { Grid, Navbar, Jumbotron, Button } from 'react-bootstrap';
 import { Row, Col, PageHeader, Well, Label } from 'react-bootstrap';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      loggedIn: false
+    }
+    this.checkCredentials = this.checkCredentials.bind(this);
+  }
+
+  checkCredentials(credentials) {
+    if (credentials.action === 'login') {
+      
+    } else {
+
+    }
+  }
+  
   render() {
     return (
       <div>

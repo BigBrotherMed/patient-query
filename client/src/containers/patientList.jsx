@@ -50,7 +50,6 @@ class PatientList extends React.Component {
         let queryUrl = '/medication_orders?patientId=' + user.id;
         axios.get(queryUrl)
         .then(orders => {
-          // console.log('****MEDICATION ORDERS: ', orders.data.orders)
           payloadObj.medication = orders.data.orders;
 
           this.props.selectPatient(payloadObj);

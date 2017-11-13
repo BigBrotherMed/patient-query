@@ -19,3 +19,7 @@ exports.getNotes = (patientId, callback) => {
     callback(allNotes);
   })
 }
+
+exports.checkCredentials = (jwtCredentials, callback) => {
+  sequelize.models.
+}
