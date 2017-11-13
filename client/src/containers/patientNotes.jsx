@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {saveNote} from '../actions/saveNoteAction.js';
 import axios from 'axios';
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, Grid, Row, Col, FormControl, Button, Well, Label} from 'react-bootstrap';
 
 class PatientNotes extends React.Component {
   constructor(props) {
@@ -46,15 +46,36 @@ class PatientNotes extends React.Component {
   render() {
     return (
       <div>
-        <h4>Patient Notes</h4>
-        <ListGroup>
-          {this.props.patient.notes.map(note => {
-            return <ListGroupItem key={note.id}>{note.note}</ListGroupItem>
-          })}
-        </ListGroup>
-        <input value={this.state.noteEditor} onChange={this.handleChange}/>
-        <button type="button" onClick={this.prepToSave}>Save note</button>
-      </div>
+      <Well>
+        <Grid>
+          <Row>
+            <Col sm={3}>
+              <Button  bsSize="small" bsStyle="danger"onClick={this.prepToSave}>Save Note</Button>
+            </Col>
+            <Col sm={9}>
+              <FormControl
+                type="text"
+                value={this.state.noteEditor}
+                placeholder="Enter New Note"
+                onChange={this.handleChange}
+              />      
+            </Col> 
+          </Row>
+        </Grid>
+      </Well>
+      <ListGroup>
+        {this.props.patient.notes.map(note => 
+          <ListGroupItem key={note.id}>
+            <Row>
+              <Col sm={1}></Col>
+              <Col sm={3}><Label bsStyle="danger">Date</Label></Col>
+              <Col sm={8}>{ note.note } </Col>
+            </Row>
+          </ListGroupItem>
+        )}
+      </ListGroup>
+    </div>
+      
     )
   }
 }

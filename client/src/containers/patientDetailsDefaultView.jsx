@@ -1,47 +1,52 @@
 import React from 'react';
-import { ListGroup, ListGroupItem, Row, Col, Label, Well } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, Row, Col, Label } from 'react-bootstrap';
 
 const PatientDetailsDefaultView = (props) => {
-      
   return (
-
-    <Well>
-      <ListGroup>
-        <ListGroupItem>
-          <Row>
-            <Col sm={6}><h4><Label bsStyle="info">First name</Label>  {props.patient.firstName}</h4></Col>
-            <Col sm={6}><h4><Label bsStyle="info">Last name</Label>  {props.patient.lastName}</h4></Col>
-          </Row>
-        </ListGroupItem>
-        <ListGroupItem>
-          <Row>
-            <Col sm={6}><h4><Label bsStyle="info">Birthdate</Label>  {props.patient.birthdate}</h4></Col>
-            <Col sm={6}><h4><Label bsStyle="info">Gender</Label>  {props.patient.gender}</h4></Col>
-          </Row>
-        </ListGroupItem>
-        <ListGroupItem>
-          <Row>
-            <Col sm={12}><h4><Label bsStyle="info">Street</Label>  {props.patient.address}</h4></Col>
-          </Row>
-        </ListGroupItem>
-        <ListGroupItem>
-          <Row>
-            <Col sm={6}><h4><Label bsStyle="info">City</Label>  {props.patient.city}</h4></Col>
-            <Col sm={6}><h4><Label bsStyle="info">Zip</Label>  {props.patient.zip}</h4></Col>
-          </Row>
-        </ListGroupItem>
-        <ListGroupItem>
-          <Row>
-            <Col sm={12}><h4><Label bsStyle="info">Phone</Label>  {props.patient.phone}</h4></Col>
-          </Row>
-        </ListGroupItem>
-        <ListGroupItem>
-          <Row>
-            <Col sm={12}><h4><Label bsStyle="info">Email</Label>  {props.patient.email}</h4></Col>
-          </Row>
-        </ListGroupItem>
-      </ListGroup>
-    </Well>
+    <ListGroup>
+      <ListGroupItem>
+        <Row>
+          <Col sm={2}><Label bsStyle="primary">First name</Label></Col>
+          <Col sm={4}>{props.patient.firstName}</Col>
+          <Col sm={2}><Label bsStyle="primary">Last name</Label></Col>
+          <Col sm={4}>{props.patient.lastName}</Col>
+        </Row>
+      </ListGroupItem>
+      <ListGroupItem>
+        <Row>
+          <Col sm={2}><Label bsStyle="primary">Birthdate</Label></Col> 
+          <Col sm={4}>{props.patient.birthdate}</Col>
+          <Col sm={2}><Label bsStyle="primary">Gender</Label></Col>
+          <Col sm={4}>{props.patient.gender}</Col>
+        </Row>
+      </ListGroupItem>
+      <ListGroupItem>
+        <Row>
+          <Col sm={2}><Label bsStyle="primary">Street</Label></Col>
+          <Col sm={10}>{props.patient.address}</Col>
+        </Row>
+      </ListGroupItem>
+      <ListGroupItem>
+        <Row>
+          <Col sm={2}><Label bsStyle="primary">City</Label></Col>
+          <Col sm={4}>{props.patient.city}</Col>
+          <Col sm={2}><Label bsStyle="primary">Zip</Label></Col>
+          <Col sm={4}>{props.patient.zip}</Col>
+        </Row>
+      </ListGroupItem>
+      <ListGroupItem>
+        <Row>
+          <Col sm={2}><Label bsStyle="primary">Phone</Label></Col>
+          <Col sm={10}>{props.patient.phone}</Col>
+        </Row>
+      </ListGroupItem>
+      <ListGroupItem>
+        <Row>
+          <Col sm={2}><Label bsStyle="primary">Email</Label></Col>
+          <Col sm={10}>{props.patient.email}</Col>
+        </Row>
+      </ListGroupItem>
+    </ListGroup>
   )
 }
 

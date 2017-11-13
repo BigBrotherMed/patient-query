@@ -2,7 +2,7 @@ import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {queryPatient} from '../actions/queryPatientName.js';
-import { Col, Row, Well } from 'react-bootstrap';
+import { Grid, Col, Row, Well, Button, ButtonToolbar, FormControl } from 'react-bootstrap';
 
 class Query extends React.Component {
   constructor() {
@@ -18,18 +18,37 @@ class Query extends React.Component {
     this.setState({lastName: event.target.value});
   }
   
-
   render() {
     return (
+      <Grid>
         <Row>
-          <Col sm={1}></Col>
-          <Col sm={10}>
-            <input value={this.state.lastName} onChange={this.handleLastNameChange} placeholder="Last Name" />
-            <button onClick={() => this.props.queryPatient(this.state, this.props.axiosFetcherResults.patients)}> Search </button>
-            <button onClick={() => this.props.queryPatient({lastName: ''}, this.props.axiosFetcherResults.patients)}> Clear </button>
+
+          <Col sm={4}>
+            <ButtonToolbar>
+              <Button bsStyle="primary" bsSize="small" onClick={() => 
+                this.props.queryPatient(this.state, this.props.axiosFetcherResults.patients)}> 
+                Search 
+              </Button>
+              <Button bsStyle="primary" bsSize="small" onClick={() => 
+                this.props.queryPatient({lastName: ''}, this.props.axiosFetcherResults.patients)}> 
+                Clear 
+              </Button>
+            </ButtonToolbar>
+          </Col>
+          <Col sm={8}>
+
+            <FormControl
+              type="text"
+              value={this.state.lastName}
+              placeholder="Enter Last Name"
+              onChange={this.handleLastNameChange}
+            />
+
+  
+
           </Col>
         </Row>
-
+      </Grid>
     )
   }
 }

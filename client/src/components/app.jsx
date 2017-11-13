@@ -12,32 +12,42 @@ class App extends Component {
         <Navbar inverse fixedTop>
           <Grid>
             <Navbar.Header>
-              <Navbar.Brand>
-                <a href="/">Big Brother Medical</a>
-              </Navbar.Brand>
+              <Navbar.Brand><a href="/">Big Brother Medical</a></Navbar.Brand>
               <Navbar.Toggle />
             </Navbar.Header>
           </Grid>
         </Navbar>
         <Jumbotron>       
-       	 	<Grid>
-       	 		
+       	 	<Grid>	 		
 				    <Row>
-				      <Col sm={5}>
+				      <Col sm={6}>
 				      	<Well>
-				      		<PageHeader><small>Patient List</small></PageHeader>
-					      	<Well><Row><Query /></Row></Well>
-					      	<Row><PatientList /></Row>
-					      </Well>
+                  <Well>
+                    <Row>
+                      <Col sm={1}></Col>
+                      <Col sm={11}>
+                        <PageHeader><small>Patient List</small></PageHeader>
+                      </Col>
+                    </Row>
+                  </Well>
+					      	<Well><Query /></Well>
+                  <Well><PatientList /></Well>
+					      </Well>           
 				      </Col>
-				      <Col sm={7}>
+				      <Col sm={6}>
 				      	<Well>
-					      	<PageHeader><small>Patient Details</small></PageHeader>
-					      	<Row><PatientDetailsMasterContainer /></Row>
+                  <Well>
+                    <Row>
+                      <Col sm={1}></Col>
+                      <Col sm={11}>
+                        <PageHeader><small>Patient Details</small></PageHeader>
+                      </Col>
+                    </Row>
+                  </Well>
+                  <PatientDetailsMasterContainer />
 					      </Well>
 				      </Col>		      
-				    </Row>
-				    
+				    </Row>				    
 				  </Grid>
 				</Jumbotron>
       </div>

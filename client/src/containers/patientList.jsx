@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import {selectPatient} from '../actions/selectPatientAction.js';
 import {axiosFetcher} from '../actions/axiosFetchAction.js';
 import axios from 'axios';
-import { ListGroup, ListGroupItem, PageHeader, Col, Row, Well, Label } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, PageHeader, Col, Row, Well, Label, Grid, Button } from 'react-bootstrap';
 
 class PatientList extends React.Component {
   constructor(props) {
@@ -15,10 +15,15 @@ class PatientList extends React.Component {
     this.prepBeforeActivePatientChange = this.prepBeforeActivePatientChange.bind(this);
   }
 
+  componentDidMount() {
+
+  }
+
   componentWillMount() {
     axios.get('/patients')
       .then(response => {
         this.props.axiosFetcher(response.data)
+        this.prepBeforeActivePatientChange(this.state.list[0]);
       })
       .catch(err => {if(err) { throw err }})
   }
@@ -59,8 +64,9 @@ class PatientList extends React.Component {
       return (
         <ListGroupItem className="listEntry" key={user.id} onClick={() => this.prepBeforeActivePatientChange(user)}>
           <Row>
-            <Col sm={5}>{ user.id.slice(6) }</Col>
-            <Col sm={7}>{ user.lastName }, { user.firstName } </Col>
+            <Col sm={1}></Col>
+            <Col sm={3}>{ user.id.slice(6) }</Col>
+            <Col sm={8}>{ user.lastName }, { user.firstName } </Col>
           </Row>
         </ListGroupItem>
       );
@@ -69,21 +75,18 @@ class PatientList extends React.Component {
 
   render() {
     return (
-    
-        <ListGroup>        
-          <ListGroupItem className="listEntry">
-            <Row>
-              <h5>
-        
-                <Col sm={2}><h4><Label bsStyle="info">ID</Label></h4></Col>
-                <Col sm={3}></Col>
-                <Col sm={4}><h4><Label bsStyle="info">Name</Label></h4></Col>
-              </h5>
-            </Row>
-          </ListGroupItem>
-          {this.createListItems()}
-        </ListGroup>
-   
+
+            <ListGroup>        
+              <ListGroupItem className="listEntry">
+                <Row>
+                  <Col sm={1}></Col>
+                  <Col sm={3}><Button bsStyle="primary" bsSize="small">Sort by ID</Button></Col>
+                  <Col sm={8}><Button bsStyle="primary" bsSize="small">Sort by Name</Button></Col>
+                </Row>
+              </ListGroupItem>
+              {this.createListItems()}
+            </ListGroup>
+
     )
   }
 }
