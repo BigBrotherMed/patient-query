@@ -49,9 +49,6 @@ class PatientNotes extends React.Component {
       <Well>
         <Grid>
           <Row>
-            <Col sm={3}>
-              <Button  bsSize="small" bsStyle="danger"onClick={this.prepToSave}>Save Note</Button>
-            </Col>
             <Col sm={9}>
               <FormControl
                 type="text"
@@ -60,6 +57,10 @@ class PatientNotes extends React.Component {
                 onChange={this.handleChange}
               />      
             </Col> 
+            <Col sm={3}>
+              <Button  bsSize="small" bsStyle="danger"onClick={this.prepToSave}>Save Note</Button>
+            </Col>
+     
           </Row>
         </Grid>
       </Well>
