@@ -52,9 +52,9 @@ class PatientDetailsMasterContainer extends React.Component {
               </Col>
              <Col sm={7}>
                 <ButtonToolbar>
-                  <Button onClick={ this.viewDetails } bsSize="default" bsStyle="primary"> Details </Button>
-                  <Button onClick={ this.viewMeds } bsSize="default" bsStyle="warning">Medication</Button>
-                  <Button onClick={ this.viewNotes } bsSize="default" bsStyle="danger"> Notes </Button>
+                  <Button onClick={ this.viewDetails } bsSize="small" bsStyle="primary"> Details </Button>
+                  <Button onClick={ this.viewMeds } bsSize="small" bsStyle="warning">Medication</Button>
+                  <Button onClick={ this.viewNotes } bsSize="small" bsStyle="danger"> Notes </Button>
                              
                 </ButtonToolbar>
               </Col>
