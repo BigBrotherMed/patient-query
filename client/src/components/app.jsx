@@ -3,8 +3,7 @@ import Query from '../containers/query.jsx';
 import PatientList from '../containers/patientList.jsx';
 import PatientDetailsMasterContainer from '../containers/PatientDetailsMasterContainer.jsx';
 import Login from '../containers/login.jsx';
-import { Grid, Navbar, Jumbotron, Button } from 'react-bootstrap';
-import { Row, Col, PageHeader, Well, Label } from 'react-bootstrap';
+import { Grid, Navbar, Nav, NavItem, Jumbotron, Button, Row, Col, PageHeader, Well, Label } from 'react-bootstrap';
 import axios from 'axios';
 
 class App extends Component {
@@ -66,59 +65,73 @@ class App extends Component {
   }
   
   render() {
-    if (!this.state.loggedIn)
-    return (
-      <div>
-        <Login checkCredentials={this.checkCredentials}/>
-      </div>
-    );
-
-
-  if (this.state.loggedIn)
     return (
       <div>
         <Navbar inverse fixedTop>
-          <Grid>
-            <Navbar.Header>
-              <Navbar.Brand><a href="/">Big Brother Medical</a></Navbar.Brand>
-              <Navbar.Brand><a onClick={this.logout}>Log out</a></Navbar.Brand>
-              <Navbar.Toggle />
-            </Navbar.Header>
-          </Grid>
+    
+          <Navbar.Header>
+            <Navbar.Brand>
+              <a href="#">Big Brother Medical</a>
+            </Navbar.Brand>
+            <Navbar.Toggle />
+          </Navbar.Header>
+          <Navbar.Collapse>
+            <Nav pullRight>
+              <NavItem href="#" onClick={this.logout}>Logout</NavItem>
+            </Nav>
+          </Navbar.Collapse>
+      
         </Navbar>
-        <Jumbotron>       
-       	 	<Grid>	 		
-				    <Row>
-				      <Col sm={5}>
-				      	<Well>
+
+        {!this.state.loggedIn ?
+          <Jumbotron>
+            <Well>
+              <Grid>
+                <Row>
+                  <Col sm={4}></Col>
+                  <Col sm={4}>
+                    <Login checkCredentials={this.checkCredentials}/>
+                  </Col>
+                  <Col sm={4}></Col>
+                </Row>
+              </Grid>
+            </Well>
+          </Jumbotron>       
+        :
+          <Jumbotron>       
+            <Grid>	 		
+              <Row>
+                <Col sm={5}>
                   <Well>
-                    <Row>
-                      <Col sm={1}></Col>
-                      <Col sm={11}>
-                        <h2><Label bsStyle="primary">Patient List</Label></h2>
-                      </Col>
-                    </Row>
-                  </Well>
-					      	<Well><Query /></Well>
-                  <Well><PatientList /></Well>
-					      </Well>           
-				      </Col>
-				      <Col sm={7}>
-				      	<Well>
+                    <Well>
+                      <Row>
+                        <Col sm={1}></Col>
+                        <Col sm={11}>
+                          <h2><Label bsStyle="primary">Patient List</Label></h2>
+                        </Col>
+                      </Row>
+                    </Well>
+                    <Well><Query /></Well>
+                    <Well><PatientList /></Well>
+                  </Well>           
+                </Col>
+                <Col sm={7}>
                   <Well>
-                    <Row>
-                      <Col sm={1}></Col>
-                      <Col sm={11}>
-                        <h2><Label bsStyle="primary">Patient Details</Label></h2>
-                      </Col>
-                    </Row>
+                    <Well>
+                      <Row>
+                        <Col sm={1}></Col>
+                        <Col sm={11}>
+                          <h2><Label bsStyle="primary">Patient Details</Label></h2>
+                        </Col>
+                      </Row>
+                    </Well>
+                    <PatientDetailsMasterContainer />
                   </Well>
-                  <PatientDetailsMasterContainer />
-					      </Well>
-				      </Col>		      
-				    </Row>				    
-				  </Grid>
-				</Jumbotron>
+                </Col>		      
+              </Row>				    
+            </Grid>
+          </Jumbotron>
+        }
       </div>
     );
   }
