@@ -1,3 +1,6 @@
-const NEW_ACCOUNT_SECRET = 'b1gbromed';
+let secrets = {
+  jwtCode: 'bigbluesea',
+  newAccountCode: 'b1gbr0m3d'
+};
 
-export default NEW_ACCOUNT_SECRET;
+module.exports = secrets;

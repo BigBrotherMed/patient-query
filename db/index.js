@@ -32,7 +32,7 @@ const Login = sequelize.define('login', {
 });
 
 const Credential = sequelize.define('credential', {
-	loginInfo: Sequelize.STRING
+	loginInfo: Sequelize.STRING(500)
 })
 
 sequelize.sync();

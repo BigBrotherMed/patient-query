@@ -5,6 +5,7 @@ import PatientDetailsMasterContainer from '../containers/PatientDetailsMasterCon
 import Login from '../containers/login.jsx';
 import { Grid, Navbar, Jumbotron, Button } from 'react-bootstrap';
 import { Row, Col, PageHeader, Well, Label } from 'react-bootstrap';
+import axios from 'axios';
 
 class App extends Component {
   constructor() {
@@ -19,7 +20,25 @@ class App extends Component {
     if (credentials.action === 'login') {
       
     } else {
+      console.log('***before axios post');
+      axios.post('/credentials', {
+        credentials: credentials
+      })
+      .then(res => {
+        console.log('***from axios success', res)
+      })
+      .catch(err => {
+        console.log('***from axios failure', err.response.status);
+        const errCode = err.response.status;
 
+        if (errCode === 422) {
+          console.log('username already exists');
+        }
+
+        if (errCode === 412) {
+          console.log('incorrect secret word');
+        }
+      });
     }
   }
   

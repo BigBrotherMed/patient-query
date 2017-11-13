@@ -13,6 +13,7 @@ class Login extends React.Component {
     this.usernameChange = this.usernameChange.bind(this);
     this.passwordChange = this.passwordChange.bind(this);
     this.secretChange = this.secretChange.bind(this);
+    this.verifyPasswordChange = this.verifyPasswordChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);  
     this.toggleLoginAndSignUp = this.toggleLoginAndSignUp.bind(this);
   }
@@ -49,7 +50,21 @@ class Login extends React.Component {
       verifyPassword: this.state.verifyPassword,
       secret: this.state.secret
     }
-    this.props.checkCredentials();
+
+    if (this.state.password === this.state.verifyPassword && this.state.secret !== '') {
+      this.props.checkCredentials(credentials);
+    } else {
+      //TODO: error message for passwords not matching
+      if (this.state.password !== this.state.verifyPassword) {
+        console.log('passwords don\'t match!');
+      }
+
+      //TODO: error message for empty secret field
+      if (this.state.secret === '') {
+        console.log('secret is empty');
+      }
+    }
+
   }
 
   toggleLoginAndSignUp(e) {

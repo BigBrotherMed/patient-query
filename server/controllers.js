@@ -55,6 +55,29 @@ module.exports = {
         res.json(allNotes);
       })
     }
+  },
+
+  credentials: {
+    get: (req, res, next) => {
+
+    },
+
+    post: (req, res, next) => {
+      console.log('@@@server side createcredentials', req.body.credentials);
+      sequelize.createCredentials(req.body.credentials, result => {
+        if (result === 'success') {
+          res.json('created');
+        }
+        
+        if (result === 'username error') {
+          res.status(422).json('username already exists');
+        }
+
+        if (result === 'secret error') {
+          res.status(412).json('secret word incorrect');
+        }
+      });
+    }
   }
 
 }

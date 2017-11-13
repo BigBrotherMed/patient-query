@@ -24252,6 +24252,10 @@ var _login2 = _interopRequireDefault(_login);
 
 var _reactBootstrap = __webpack_require__(160);
 
+var _axios = __webpack_require__(90);
+
+var _axios2 = _interopRequireDefault(_axios);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24278,7 +24282,25 @@ var App = function (_Component) {
   _createClass(App, [{
     key: 'checkCredentials',
     value: function checkCredentials(credentials) {
-      if (credentials.action === 'login') {} else {}
+      if (credentials.action === 'login') {} else {
+        console.log('***before axios post');
+        _axios2.default.post('/credentials', {
+          credentials: credentials
+        }).then(function (res) {
+          console.log('***from axios success', res);
+        }).catch(function (err) {
+          console.log('***from axios failure', err.response.status);
+          var errCode = err.response.status;
+
+          if (errCode === 422) {
+            console.log('username already exists');
+          }
+
+          if (errCode === 412) {
+            console.log('incorrect secret word');
+          }
+        });
+      }
     }
   }, {
     key: 'render',
@@ -45129,6 +45151,7 @@ var Login = function (_React$Component) {
     _this.usernameChange = _this.usernameChange.bind(_this);
     _this.passwordChange = _this.passwordChange.bind(_this);
     _this.secretChange = _this.secretChange.bind(_this);
+    _this.verifyPasswordChange = _this.verifyPasswordChange.bind(_this);
     _this.onSubmit = _this.onSubmit.bind(_this);
     _this.toggleLoginAndSignUp = _this.toggleLoginAndSignUp.bind(_this);
     return _this;
@@ -45172,7 +45195,20 @@ var Login = function (_React$Component) {
         verifyPassword: this.state.verifyPassword,
         secret: this.state.secret
       };
-      this.props.checkCredentials();
+
+      if (this.state.password === this.state.verifyPassword && this.state.secret !== '') {
+        this.props.checkCredentials(credentials);
+      } else {
+        //TODO: error message for passwords not matching
+        if (this.state.password !== this.state.verifyPassword) {
+          console.log('passwords don\'t match!');
+        }
+
+        //TODO: error message for empty secret field
+        if (this.state.secret === '') {
+          console.log('secret is empty');
+        }
+      }
     }
   }, {
     key: 'toggleLoginAndSignUp',
