@@ -18,14 +18,30 @@ class App extends Component {
 
   checkCredentials(credentials) {
     if (credentials.action === 'login') {
-      
+      console.log('from app.jsx ', credentials);
+      axios.get('/credentials', {
+        params: {
+          credentials: credentials
+        }
+      })
+      .then(res => {
+        this.setState({
+          loggedIn: true
+        })
+      })
+      .catch(err => {
+        console.error(err.response.status);
+      })
+
     } else {
-      console.log('***before axios post');
       axios.post('/credentials', {
         credentials: credentials
       })
       .then(res => {
-        console.log('***from axios success', res)
+        console.log('***from axios success', res);
+        this.setState({
+          loggedIn: true
+        })
       })
       .catch(err => {
         console.log('***from axios failure', err.response.status);
@@ -43,6 +59,15 @@ class App extends Component {
   }
   
   render() {
+    if (!this.state.loggedIn)
+    return (
+      <div>
+        <Login checkCredentials={this.checkCredentials}/>
+      </div>
+    );
+
+
+  if (this.state.loggedIn)
     return (
       <div>
         <Navbar inverse fixedTop>

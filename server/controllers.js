@@ -59,11 +59,17 @@ module.exports = {
 
   credentials: {
     get: (req, res, next) => {
-
+      console.log('*&^*&^server controller: ', req.query.credentials)
+      sequelize.checkCredentials(req.query.credentials, valid => {
+        if (valid) {
+          res.json('success');
+        } else {
+          res.status(403).json('invalid login');
+        }
+      })
     },
 
     post: (req, res, next) => {
-      console.log('@@@server side createcredentials', req.body.credentials);
       sequelize.createCredentials(req.body.credentials, result => {
         if (result === 'success') {
           res.json('created');

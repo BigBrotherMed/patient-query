@@ -24282,12 +24282,29 @@ var App = function (_Component) {
   _createClass(App, [{
     key: 'checkCredentials',
     value: function checkCredentials(credentials) {
-      if (credentials.action === 'login') {} else {
-        console.log('***before axios post');
+      var _this2 = this;
+
+      if (credentials.action === 'login') {
+        console.log('from app.jsx ', credentials);
+        _axios2.default.get('/credentials', {
+          params: {
+            credentials: credentials
+          }
+        }).then(function (res) {
+          _this2.setState({
+            loggedIn: true
+          });
+        }).catch(function (err) {
+          console.error(err.response.status);
+        });
+      } else {
         _axios2.default.post('/credentials', {
           credentials: credentials
         }).then(function (res) {
           console.log('***from axios success', res);
+          _this2.setState({
+            loggedIn: true
+          });
         }).catch(function (err) {
           console.log('***from axios failure', err.response.status);
           var errCode = err.response.status;
@@ -24305,7 +24322,13 @@ var App = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(
+      if (!this.state.loggedIn) return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(_login2.default, { checkCredentials: this.checkCredentials })
+      );
+
+      if (this.state.loggedIn) return _react2.default.createElement(
         'div',
         null,
         _react2.default.createElement(
@@ -45196,17 +45219,26 @@ var Login = function (_React$Component) {
         secret: this.state.secret
       };
 
-      if (this.state.password === this.state.verifyPassword && this.state.secret !== '') {
-        this.props.checkCredentials(credentials);
-      } else {
-        //TODO: error message for passwords not matching
-        if (this.state.password !== this.state.verifyPassword) {
-          console.log('passwords don\'t match!');
-        }
+      if (credentials.action === 'signup') {
+        if (this.state.password === this.state.verifyPassword && this.state.secret !== '') {
+          this.props.checkCredentials(credentials);
+        } else {
+          //TODO: error message for passwords not matching
+          if (this.state.password !== this.state.verifyPassword) {
+            console.log('passwords don\'t match!');
+          }
 
-        //TODO: error message for empty secret field
-        if (this.state.secret === '') {
-          console.log('secret is empty');
+          //TODO: error message for empty secret field
+          if (this.state.secret === '') {
+            console.log('secret is empty');
+          }
+        }
+      } else {
+        if (this.state.username === '' || this.state.password === '') {
+          console.log('please enter both a username and password');
+        } else {
+          console.log('!@*!@^*!&^ BEFORE CHECK: ', credentials);
+          this.props.checkCredentials(credentials);
         }
       }
     }

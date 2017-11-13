@@ -22,9 +22,28 @@ exports.getNotes = (patientId, callback) => {
   })
 }
 
+exports.checkCredentials = (credentials, callback) => {
+  console.log('@@@@FROM GET', credentials);
+  const credsToSave = {
+    username: credentials.username,
+    password: credentials.password
+  }
+  const cred = jwt.sign(credsToSave, SECRET.jwtCode);
+
+  sequelize.models.credential.findAll({
+    where: {
+      loginInfo: cred
+    }
+  }).then(results => {
+    if (results.length > 0) {
+      callback(true);
+    } else {
+      callback(false);
+    }
+  })
+}
+
 exports.createCredentials = (credentials, callback) => {
-  console.log('@@@@DB CONTROLLER CREDENTIALS', credentials);
-  console.log('!!!!SECRET!!!!', SECRET.newAccountCode);
   if (credentials.secret !== SECRET.newAccountCode) {
     callback('secret error');
     return;
@@ -46,8 +65,12 @@ exports.createCredentials = (credentials, callback) => {
       })
 
       //add jwt to credentials table (no need to chain to logins)
+      const credsToSave = {
+        username: credentials.username,
+        password: credentials.password
+      }
       sequelize.models.credential.create({
-        loginInfo: jwt.sign(credentials, SECRET.jwtCode)
+        loginInfo: jwt.sign(credsToSave, SECRET.jwtCode)
       }).then(() => {
         callback('success');
       });
