@@ -24276,10 +24276,18 @@ var App = function (_Component) {
       loggedIn: false
     };
     _this.checkCredentials = _this.checkCredentials.bind(_this);
+    _this.logout = _this.logout.bind(_this);
     return _this;
   }
 
   _createClass(App, [{
+    key: 'logout',
+    value: function logout() {
+      this.setState({
+        loggedIn: false
+      });
+    }
+  }, {
     key: 'checkCredentials',
     value: function checkCredentials(credentials) {
       var _this2 = this;
@@ -24347,6 +24355,15 @@ var App = function (_Component) {
                   'a',
                   { href: '/' },
                   'Big Brother Medical'
+                )
+              ),
+              _react2.default.createElement(
+                _reactBootstrap.Navbar.Brand,
+                null,
+                _react2.default.createElement(
+                  'a',
+                  { onClick: this.logout },
+                  'Log out'
                 )
               ),
               _react2.default.createElement(_reactBootstrap.Navbar.Toggle, null)

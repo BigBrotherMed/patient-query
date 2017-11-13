@@ -14,6 +14,13 @@ class App extends Component {
       loggedIn: false
     }
     this.checkCredentials = this.checkCredentials.bind(this);
+    this.logout = this.logout.bind(this);
+  }
+
+  logout() {
+    this.setState({
+      loggedIn: false
+    })
   }
 
   checkCredentials(credentials) {
@@ -74,6 +81,7 @@ class App extends Component {
           <Grid>
             <Navbar.Header>
               <Navbar.Brand><a href="/">Big Brother Medical</a></Navbar.Brand>
+              <Navbar.Brand><a onClick={this.logout}>Log out</a></Navbar.Brand>
               <Navbar.Toggle />
             </Navbar.Header>
           </Grid>
