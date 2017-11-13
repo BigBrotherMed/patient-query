@@ -1,4 +1,5 @@
 import React from 'react';
+import { Grid, Navbar, Jumbotron, Button, Row, Col, PageHeader, Well, Label, FormControl } from 'react-bootstrap';
 
 class Login extends React.Component {
   constructor(props) {
@@ -99,35 +100,79 @@ class Login extends React.Component {
   render() {
     if (this.state.page === 'login')
       return (
-        <div>
-          <h2>Log in</h2>
-          <p>Username</p>
-          <input value={this.state.username} onChange={this.usernameChange} />
-          <p>Password</p>
-          <input value={this.state.password} onChange={this.passwordChange} />
-          <button type="button" onClick={this.onSubmit}>Log in</button>
-          <hr/>
-          <button type="button" onClick={this.toggleLoginAndSignUp}>Create new account</button>
-        </div>
+        <Well>
+          <Well>
+            <h2><Label bsStyle="primary">Log in</Label></h2>
+          </Well>
+          <Well>
+            <FormControl
+              type="text"
+              value={this.state.username}
+              placeholder="User Name"
+              onChange={this.usernameChange}
+            /> 
+            <FormControl
+              type="text"
+              value={this.state.password}
+              placeholder="Password"
+              onChange={this.passwordChange}
+            />   
+          </Well>  
+          <Grid>
+            <Row>
+              <Col sm={1}></Col>
+              <Col sm={11}>
+                <Button bsStyle="primary" onClick={this.onSubmit}>Log in</Button>
+                <Button bsStyle="primary" onClick={this.toggleLoginAndSignUp}>Create New Account</Button>
+              </Col>
+            </Row>
+          </Grid>         
+        </Well>
       );
 
     if (this.state.page === 'signup')
       return (
-        <div>
-          <h2>Create a new account</h2>
-          <p>Username</p>
-          <input value={this.state.username} onChange={this.usernameChange} />
-          <p>Password</p>
-          <input value={this.state.password} onChange={this.passwordChange} />
-          <p>Verify password</p>
-          <input value={this.state.verifyPassword} onChange={this.verifyPasswordChange} />
-          <p>Secret word</p>
-          <input value={this.state.secret} onChange={this.secretChange} />
-          <button type="button" onClick={this.onSubmit}>Create new account</button>
-          <hr/>
-          <button type="button" onClick={this.toggleLoginAndSignUp}>Log in</button>
-        </div>
-      );
+        <Well>
+          <Well>
+            <h2><Label bsStyle="primary">Create New Account</Label></h2>
+          </Well>
+          <Well>
+            <FormControl
+              type="text"
+              value={this.state.username}
+              placeholder="Choose a User Name"
+              onChange={this.usernameChange}
+            />  
+            <FormControl
+              type="text"
+              value={this.state.password}
+              placeholder="Choose a Password"
+              onChange={this.passwordChange}
+            />  
+            <FormControl
+              type="text"
+              value={this.state.verifyPassword}
+              placeholder="Retype Password"
+              onChange={this.verifyPasswordChange}
+            />  
+            <FormControl
+              type="text"
+              value={this.state.secret}
+              placeholder="Enter Secret Word"
+              onChange={this.secretChange}
+            />  
+          </Well>
+          <Grid>
+            <Row>
+              <Col sm={1}></Col>
+              <Col sm={11}>
+                <Button bsStyle="primary" onClick={this.onSubmit}>Create New Account</Button>
+                <Button bsStyle="primary" onClick={this.toggleLoginAndSignUp}>Log in</Button>
+              </Col>
+            </Row>
+          </Grid>
+        </Well>
+      );  
   }
 }
 

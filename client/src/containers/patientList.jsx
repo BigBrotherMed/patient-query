@@ -13,6 +13,8 @@ class PatientList extends React.Component {
       list: this.props.patients
     }
     this.prepBeforeActivePatientChange = this.prepBeforeActivePatientChange.bind(this);
+    this.sortById = this.sortById.bind(this);
+    this.sortByLastName = this.sortByLastName.bind(this);
   }
 
   componentDidMount() {
@@ -74,6 +76,34 @@ class PatientList extends React.Component {
     })
   }
 
+  sortByLastName() {
+    this.setState({list:
+      this.state.list.sort(function (a, b) {
+        if (a.lastName < b.lastName) {
+          return -1;
+        }
+        if (a.lastName > b.lastName) {
+          return 1;
+        }
+        return 0;
+      })
+    }); 
+  }
+
+  sortById() {
+    this.setState({list:
+      this.state.list.sort(function (a, b) {
+        if (a.id < b.id) {
+          return -1;
+        }
+        if (a.id > b.id) {
+          return 1;
+        }
+        return 0;
+      })
+    });     
+  }
+
   render() {
     return (
 
@@ -81,8 +111,8 @@ class PatientList extends React.Component {
               <ListGroupItem className="listEntry">
                 <Row>
    
-                  <Col sm={4}><Button bsStyle="primary" bsSize="xsmall">Sort by ID</Button></Col>
-                  <Col sm={8}><Button bsStyle="primary" bsSize="xsmall">Sort by Name</Button></Col>
+                  <Col sm={4}><Button bsStyle="primary" bsSize="xsmall" onClick={this.sortById}>Sort by ID</Button></Col>
+                  <Col sm={8}><Button bsStyle="primary" bsSize="xsmall" onClick={this.sortByLastName}>Sort by Name</Button></Col>
                 </Row>
               </ListGroupItem>
               {this.createListItems()}
