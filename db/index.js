@@ -27,13 +27,14 @@ const Note = sequelize.define('note', {
   note: Sequelize.STRING(500)
 });
 
-const Login = sequelize.define('login', {
-	username: Sequelize.STRING
-});
+// const Login = sequelize.define('login', {
+// 	username: Sequelize.STRING
+// });
 
 const Credential = sequelize.define('credential', {
-	loginInfo: Sequelize.STRING(500)
-})
+	username: Sequelize.STRING(500),
+	password: Sequelize.STRING(500)
+});
 
 sequelize.sync();
 

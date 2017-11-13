@@ -1,6 +1,8 @@
 const sequelize = require('./index.js');
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 const SECRET = require('../config/config.js');
+const saltRounds = 10;
+const bcrypt = require('bcrypt');
 
 //This function takes in the patient ID and a note to add. Callback parameter is
 //invoked on success with all notes associated with current patient
@@ -23,20 +25,30 @@ exports.getNotes = (patientId, callback) => {
 }
 
 exports.checkCredentials = (credentials, callback) => {
-  console.log('@@@@FROM GET', credentials);
-  const credsToSave = {
-    username: credentials.username,
-    password: credentials.password
-  }
-  const cred = jwt.sign(credsToSave, SECRET.jwtCode);
+  // const credsToSave = {
+  //   username: credentials.username,
+  //   password: credentials.password
+  // }
+  // const cred = jwt.sign(credsToSave, SECRET.jwtCode);
+  // console.log('#####during check: ', credsToSave);
+  // console.log('#####during check: ', cred);
+  
+
+  const creds = JSON.parse(credentials);
 
   sequelize.models.credential.findAll({
     where: {
-      loginInfo: cred
+      username: creds.username
     }
   }).then(results => {
     if (results.length > 0) {
-      callback(true);
+      const tableHash = results[0].dataValues.password;
+
+      bcrypt.compare(creds.password, tableHash, (err, res) => {
+        console.log('====', typeof creds.password)
+        callback(res);
+      });
+
     } else {
       callback(false);
     }
@@ -50,29 +62,23 @@ exports.createCredentials = (credentials, callback) => {
   }
 
   //looks for username in login table
-  sequelize.models.login.findAll({
+  sequelize.models.credential.findAll({
     where: {
       username: credentials.username
     }
-  }).then(username => {
-
+  }).then(creds => {
     //could not find in logins table
-    if (!username || username.length === 0) {
+    if (!creds || creds.length === 0) {
 
-      //add username to login table
-      sequelize.models.login.create({
-        username: credentials.username
-      })
-
-      //add jwt to credentials table (no need to chain to logins)
-      const credsToSave = {
-        username: credentials.username,
-        password: credentials.password
-      }
-      sequelize.models.credential.create({
-        loginInfo: jwt.sign(credsToSave, SECRET.jwtCode)
-      }).then(() => {
-        callback('success');
+      bcrypt.genSalt(saltRounds, (err, salt) => {        
+        bcrypt.hash(credentials.password, salt, (err, hash) => {
+          sequelize.models.credential.create({
+            username: credentials.username,
+            password: hash
+          }).then(() => {
+            callback('success');
+          });
+        });
       });
 
     } else {
