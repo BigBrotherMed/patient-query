@@ -55,6 +55,35 @@ module.exports = {
         res.json(allNotes);
       })
     }
+  },
+
+  credentials: {
+    get: (req, res, next) => {
+      console.log('*&^*&^server controller: ', req.query.credentials)
+      sequelize.checkCredentials(req.query.credentials, valid => {
+        if (valid) {
+          res.json('success');
+        } else {
+          res.status(403).json('invalid login');
+        }
+      })
+    },
+
+    post: (req, res, next) => {
+      sequelize.createCredentials(req.body.credentials, result => {
+        if (result === 'success') {
+          res.json('created');
+        }
+        
+        if (result === 'username error') {
+          res.status(422).json('username already exists');
+        }
+
+        if (result === 'secret error') {
+          res.status(412).json('secret word incorrect');
+        }
+      });
+    }
   }
 
 }

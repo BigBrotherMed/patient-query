@@ -9,5 +9,9 @@ router.get('/notes', controller.notes.get);
 
 router.post('/notes', controller.notes.post);
 
+router.get('/credentials', controller.credentials.get);
+
+router.post('/credentials', controller.credentials.post);
+
 
 module.exports = router;
