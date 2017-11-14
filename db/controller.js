@@ -25,15 +25,6 @@ exports.getNotes = (patientId, callback) => {
 }
 
 exports.checkCredentials = (credentials, callback) => {
-  // const credsToSave = {
-  //   username: credentials.username,
-  //   password: credentials.password
-  // }
-  // const cred = jwt.sign(credsToSave, SECRET.jwtCode);
-  // console.log('#####during check: ', credsToSave);
-  // console.log('#####during check: ', cred);
-  
-
   const creds = JSON.parse(credentials);
 
   sequelize.models.credential.findAll({
@@ -45,7 +36,6 @@ exports.checkCredentials = (credentials, callback) => {
       const tableHash = results[0].dataValues.password;
 
       bcrypt.compare(creds.password, tableHash, (err, res) => {
-        console.log('====', typeof creds.password)
         callback(res);
       });
 

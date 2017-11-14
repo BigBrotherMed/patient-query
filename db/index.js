@@ -16,7 +16,7 @@ const Sequelize = require('sequelize');
 sequelize
 	.authenticate()
 	.then(() => {
-	  console.log('Sequelize authentication ok');
+
 	})
 	.catch(error => {
 	  console.error('Error during authentication', error);
