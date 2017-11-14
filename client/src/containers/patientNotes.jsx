@@ -13,6 +13,7 @@ class PatientNotes extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.prepToSave = this.prepToSave.bind(this);
+    this.sortNotes = this.sortNotes.bind(this)
   }
 
   handleChange(e) {
@@ -42,6 +43,15 @@ class PatientNotes extends React.Component {
       noteEditor: ''
     });
   } 
+  sortNotes (b, a) {
+    if (a.createdAt < b.createdAt) {
+      return -1;
+    }
+    if (a.createdAt > b.createdAt) {
+      return 1;
+    }
+    return 0;
+  }
 
   render() {
     return (
@@ -70,7 +80,7 @@ class PatientNotes extends React.Component {
 
 
         <ListGroup>
-          {this.props.patient.notes.map(note => 
+          {this.props.patient.notes.sort(this.sortNotes).map(note => 
             <ListGroupItem className="listEntry" key={note.id} bsStyle="danger">
               <Row>
                 <Col sm={1}></Col>
