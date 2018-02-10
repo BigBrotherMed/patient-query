@@ -68,7 +68,7 @@ class PatientList extends React.Component {
             onClick={() => this.prepBeforeActivePatientChange(user)}>
           <Row>
  
-            <Col sm={4}>{ user.id.slice(6) }</Col>
+            <Col sm={4}>{ user.id.slice(0, 6) }...</Col>
             <Col sm={8}>{ user.lastName }, { user.firstName } </Col>
           </Row>
         </ListGroupItem>

@@ -8,7 +8,7 @@ const sequelize = require('../db/controller.js');
 let router = require('./routes.js');
 
 const app = express();
-const PORT = 5151;
+const PORT = 5150;
 
 app.use(parser.json());
 app.use(parser.urlencoded({extended: true}));

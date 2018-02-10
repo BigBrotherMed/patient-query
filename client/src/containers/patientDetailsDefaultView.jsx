@@ -14,7 +14,7 @@ const PatientDetailsDefaultView = (props) => {
       </ListGroupItem>
       <ListGroupItem bsStyle="info">
         <Row>
-          <Col sm={2}><Label bsStyle="primary">Birthdate</Label></Col> 
+          <Col sm={2}><Label bsStyle="primary">DOB</Label></Col> 
           <Col sm={4}>{props.patient.birthdate}</Col>
           <Col sm={2}><Label bsStyle="primary">Gender</Label></Col>
           <Col sm={4}>{props.patient.gender}</Col>

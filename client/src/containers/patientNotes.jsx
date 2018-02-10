@@ -83,9 +83,10 @@ class PatientNotes extends React.Component {
           {this.props.patient.notes.sort(this.sortNotes).map(note => 
             <ListGroupItem className="listEntry" key={note.id} bsStyle="danger">
               <Row>
+                
+                <Col sm={5}><p><Label bsStyle="danger">{note.createdAt.slice(0, 10)}</Label></p></Col>
                 <Col sm={1}></Col>
-                <Col sm={3}><h4><Label bsStyle="danger">{note.createdAt.slice(0, 10)}</Label></h4></Col>
-                <Col sm={8}><h5>{ note.note }</h5> </Col>
+                <Col sm={5}><p>{ note.note }</p> </Col>
               </Row>
             </ListGroupItem>
           )}

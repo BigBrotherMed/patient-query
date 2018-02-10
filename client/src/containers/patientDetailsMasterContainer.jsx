@@ -44,7 +44,7 @@ class PatientDetailsMasterContainer extends React.Component {
                 <ListGroupItem bsStyle="info">
                   
                     {this.props.activePatient ? 
-                      this.props.activePatient.patient.id.slice(6) + ' - ' +
+                      this.props.activePatient.patient.id.slice(0, 6) + '... \n ' +
                       this.props.activePatient.patient.lastName + ', ' + 
                       this.props.activePatient.patient.firstName 
                       : null}

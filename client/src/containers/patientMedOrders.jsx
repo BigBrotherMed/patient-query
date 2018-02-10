@@ -20,12 +20,6 @@ const PatientMedOrders = (props) => {
                 <Col sm={10}>{order.medicationText}</Col>
               </Row>
             </ListGroupItem>
-            <ListGroupItem bsStyle="warning">
-              <Row>
-                <Col sm={6}><Label bsStyle="warning">Dosage</Label>  {order.dosageInstruction}</Col>
-                <Col sm={6}><Label bsStyle="warning">Frequency</Label>  {order.dosageFrequency}</Col>
-              </Row>
-            </ListGroupItem>
           </ListGroup>
         </div>
       )}
